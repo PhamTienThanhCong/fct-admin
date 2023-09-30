@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table, Modal, message } from "antd";
+import { Button, Table, message } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import UserModal, { DataType } from "../../components/common/Modal";
+import Alert from "../../components/common/Alert";
 
 const ListUser: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -10,6 +11,7 @@ const ListUser: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [dataSource, setDataSource] = useState<DataType[]>([]);
   const [selectedUser, setSelectedUser] = useState<DataType | null>(null);
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -66,16 +68,8 @@ const ListUser: React.FC = () => {
   };
 
   const showDeleteConfirm = (user: DataType) => {
-    Modal.confirm({
-      title: "Xác nhận xóa",
-      content: `Bạn có muốn xóa người dùng "${user.name}" không?`,
-      okText: "Xóa",
-      okType: "danger",
-      cancelText: "Hủy",
-      onOk() {
-        handleDelete(user);
-      },
-    });
+    setSelectedUser(user);
+    setIsDeleteConfirmVisible(true); // Hiển thị Alert khi ấn nút xóa
   };
 
   const handleDelete = (user: DataType) => {
@@ -87,6 +81,7 @@ const ListUser: React.FC = () => {
     } catch (error) {
       message.error("Xóa người dùng thất bại");
     }
+    setIsDeleteConfirmVisible(false); // Ẩn Alert sau khi xử lý xóa
   };
 
   const handleAddUser = () => {
@@ -155,6 +150,14 @@ const ListUser: React.FC = () => {
           onAction={handleSaveUser}
           mode={modalMode}
           userData={selectedUser || undefined}
+        />
+      )}
+       {isDeleteConfirmVisible && (
+        <Alert
+          visible={isDeleteConfirmVisible}
+          user={selectedUser}
+          onCancel={() => setIsDeleteConfirmVisible(false)}
+          onConfirm={handleDelete}
         />
       )}
     </div>
