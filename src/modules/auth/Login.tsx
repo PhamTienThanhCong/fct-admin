@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { BiLogIn } from "react-icons/bi";
-import Image from "../../public/images/login-bg.png";
+import BgLoginImage from "../../assets/images/BgLoginImage.png";
 import "./login.scss";
 import { showAlert } from "../../utils/showAlert";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -43,7 +43,7 @@ const Login = () => {
 
   return (
     <div className="wrapper-login">
-      <img src={Image} alt="Background" className="background-image" />
+      <img src={BgLoginImage} alt="Background" className="background-image" />
       <div className="form-login">
         <div className="content-login">
           <div className="title-content">

@@ -33,6 +33,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loginRequest.fulfilled, (state, action: PayloadAction<any>) => {
         state.isAuthenticated = true;
+        state.isFetching = false;
         state.currentUser = action.payload.user;
         // save token to localStorage
         localStorage.setItem("token", action.payload.user.token);
