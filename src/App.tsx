@@ -4,6 +4,7 @@ import Login from "./modules/auth/Login";
 import "./App.scss";
 import AdminRoute from "./middlewares/AdminRoute";
 import AdminLayout from "./layouts/AdminLayout";
+import UserContainer from "./modules/users/UserContainer";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/" element={"home"} />
-              <Route path="/listUser" element={"listUser"} />
+              <Route path="/listUser" element={<UserContainer />} />
             </Route>
           </Route>
         </Routes>

@@ -21,14 +21,7 @@ const AdminLayout: React.FC = () => {
       <Layout>
         <HeaderComponent collapsed={collapsed} toggleMenu={toggleMenu} />
         
-        <Content
-          style={{
-            margin: "20px",
-            padding: 10,
-            minHeight: 280,
-            backgroundColor: "#fff",
-          }}
-        >
+        <Content className="content-container">
           <Outlet />
         </Content>
         
