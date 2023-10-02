@@ -1,18 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import Topage from './modules/top/topPage';
-// import Login from './modules/auth/Login';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./modules/auth/Login";
+import "./App.scss";
+import AdminRoute from "./middlewares/AdminRoute";
+import AdminLayout from "./layouts/AdminLayout";
 
 function App() {
   return (
-    <Router>
-      <Provider store={store}>
-        <Topage/>
-        {/* <Login/> */}
-      </Provider>
-    </Router>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route element={<AdminRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/" element={"home"} />
+              <Route path="/listUser" element={"listUser"} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
