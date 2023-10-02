@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Form, Input, Button } from "antd";
+import { Modal, Form, Input } from "antd";
 
 export interface DataType {
     key: React.Key;
@@ -12,7 +12,7 @@ interface UserModalProps {
     visible: boolean;
     onCancel: () => void;
     onAction: (values: DataType) => void;
-    mode: "add" | "edit" | "delete";
+    mode: "add" | "edit" | "delete" | "Reply";
     userData?: DataType;
 }
 

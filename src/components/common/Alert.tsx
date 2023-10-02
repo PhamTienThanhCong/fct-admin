@@ -6,7 +6,7 @@ interface DeleteConfirmModalProps {
   visible: boolean;
   user: DataType | null;
   onCancel: () => void;
-  onConfirm: (user: DataType) => void; // Thêm tham số user vào hàm onConfirm
+  onConfirm: (user: DataType) => void;
 }
 
 const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
@@ -19,7 +19,7 @@ const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
     <Modal
       title="Xác nhận xóa"
       visible={visible}
-      onOk={() => onConfirm(user!)} // Truyền user vào hàm onConfirm
+      onOk={() => onConfirm(user!)} 
       onCancel={onCancel}
       okText="Xóa"
       okType="danger"
