@@ -27,11 +27,11 @@ const HeaderComponent = (props: IHeaderComponentProps) => {
             </Col>
             <Col md={4}>
               <Badge count={30}>
-                <div style={{ fontSize: "23px" }}>
+                <a href="/notification" style={{ fontSize: "23px",color:'#333' }}>
                   <Tooltip title="Thông báo" placement="bottom">
                     <BellOutlined />
                   </Tooltip>
-                </div>
+                </a>
               </Badge>
             </Col>
             <Col md={4}>

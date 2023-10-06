@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Col, Row } from "antd";
-import "./DashBroad.scss"; // Đảm bảo bạn import CSS đúng cách
+import "./DashBroad.scss";
 
 function DashBroad() {
   return (

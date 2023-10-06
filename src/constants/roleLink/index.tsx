@@ -1,4 +1,4 @@
-import { UsergroupAddOutlined } from '@ant-design/icons';
+import { BellOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { DashboardTwoTone } from '@ant-design/icons';
 
 export const ADMIN_SLIDER = [
@@ -13,6 +13,12 @@ export const ADMIN_SLIDER = [
     icon: <UsergroupAddOutlined />,
     link: "/listUser",
     title: "User List",
+  },
+  {
+    key: "3",
+    icon: <BellOutlined />,
+    link: "/notification",
+    title: "Notification",
   },
 ];
 

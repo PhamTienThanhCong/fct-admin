@@ -1,0 +1,18 @@
+@import '../../assets/_base.scss';
+
+.action-buttons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+.action-button-delete,
+.action-button-edit{
+  text-align: center;
+}
+.button-add-user{
+  position: relative;
+  float: right;
+  margin-bottom: 20px;
+}
