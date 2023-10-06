@@ -3,6 +3,7 @@ import Sider from "antd/es/layout/Sider";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import { memo } from "react";
+import '../../App.scss'
 
 interface SliderBarComponentsProps {
   collapsed: boolean;
@@ -32,14 +33,13 @@ const SliderBarComponents = (props: SliderBarComponentsProps) => {
   }));
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} width={250}>
+    <Sider className="drawer" trigger={null} collapsible collapsed={collapsed} width={250}>
       <div className="logo">
         <img src={Logo} alt="" className={collapsed ? "collapsed-logo" : ""} />
         {!collapsed && <h2 style={{ fontSize: "25px" }}>Finding Car</h2>}
       </div>
       <Menu
         theme="dark"
-        className="drawer"
         mode="inline"
         defaultSelectedKeys={menuSelected === "" ? ["1"] : [menuSelectedKey]}
         items={menuItemRenders}

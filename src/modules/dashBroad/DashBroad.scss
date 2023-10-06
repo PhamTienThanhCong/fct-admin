@@ -1,0 +1,64 @@
+.dashboard-box {
+    width: 200px;
+    text-align: center;
+    padding: 16px;
+    border: 1px solid #ccc;
+    margin: 8px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .dashboard-box:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-4px);
+  }
+  
+  .dashboard-box > .anticon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #1890ff; /* Màu sắc của biểu tượng */
+  }
+  
+  .dashboard-box > span {
+    display: block;
+    font-size: 16px;
+    color: #333; /* Màu sắc của văn bản */
+  }
+  
+  .dashboard-box > span:last-child {
+    font-size: 20px;
+    color: #1890ff; /* Màu sắc của con số cuối cùng */
+  }
+  .icon-container {
+    display: flex;
+    align-items: center;
+    background-color: #e74c3c;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .icon-container svg {
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .text-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .text-container span {
+    margin-bottom: 4px;
+  } 
+  
+  /* Để áp dụng cho tất cả các icon và text container */
+  .col {
+    display: flex;
+    align-items: center;
+  }
+  

@@ -1,6 +1,11 @@
 .content-container{
     margin: 20px;
     padding: 10px;
-    min-height: 280px;
     background-color: "#fff";
+}
+.drawer,
+.layout-slider{
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }

@@ -6,6 +6,7 @@ import SliderBarComponents from "./components/SliderBarComponents";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import { ADMIN_SLIDER } from "../constants/roleLink";
+import '../App.scss'
 
 const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -17,14 +18,11 @@ const AdminLayout: React.FC = () => {
   return (
     <Layout className="layout-slider">
       <SliderBarComponents collapsed={collapsed} menuItems={ADMIN_SLIDER} />
-      
-      <Layout>
+      <Layout style={{overflowY:'auto'}} > 
         <HeaderComponent collapsed={collapsed} toggleMenu={toggleMenu} />
-        
         <Content className="content-container">
           <Outlet />
         </Content>
-        
         <FooterComponent />
       </Layout>
     </Layout>

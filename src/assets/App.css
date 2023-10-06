@@ -53,6 +53,7 @@ body {
     text-align:center;
     padding-top:10px;
 }
+  
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -5,6 +5,8 @@ import "./App.scss";
 import AdminRoute from "./middlewares/AdminRoute";
 import AdminLayout from "./layouts/AdminLayout";
 import UserContainer from "./modules/users/UserContainer";
+import './assets/App.css'
+import DashBroad from "./modules/dashBroad/DashBroad";
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
-              <Route path="/" element={"home"} />
+              <Route path="/" element={<DashBroad/>} />
               <Route path="/listUser" element={<UserContainer />} />
             </Route>
           </Route>
