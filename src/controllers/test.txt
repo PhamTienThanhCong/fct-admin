@@ -1,0 +1,3 @@
+<BaseModal size="lg" scrollable className="shadow-lg" show={showModalEdit} onHide={() => { setShowModalEdit(false); }} zIndex={1056}>
+    <div>modal</div>                
+</BaseModal>
