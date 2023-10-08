@@ -29,6 +29,10 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("token");
     },
+    toggleLogout: (state) => {
+      localStorage.removeItem('token')
+      window.location.href = '/login'
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(loginRequest.fulfilled, (state, action: PayloadAction<any>) => {
@@ -53,5 +57,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout,toggleLogout } = authSlice.actions;
 export default authSlice.reducer;

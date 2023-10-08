@@ -8,6 +8,7 @@ import UserContainer from "./modules/users/UserContainer";
 import './assets/App.css'
 import DashBroad from "./modules/dashBroad/DashBroad";
 import Notification from "./modules/notification/Notification";
+import Profile from "./modules/profile/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<DashBroad/>} />
               <Route path="/listUser" element={<UserContainer />} />
               <Route path="/notification" element={<Notification/>} />
+              <Route path="/profile" element={<Profile/>} />
             </Route>
           </Route>
         </Routes>

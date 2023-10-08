@@ -33,7 +33,7 @@ const SliderBarComponents = (props: SliderBarComponentsProps) => {
   }));
 
   return (
-    <Sider className="drawer" trigger={null} collapsible collapsed={collapsed} width={250}>
+    <Sider  className="drawer" trigger={null} collapsible collapsed={collapsed} width={250}>
       <div className="logo">
         <img src={Logo} alt="" className={collapsed ? "collapsed-logo" : ""} />
         {!collapsed && <h2 style={{ fontSize: "25px" }}>Finding Car</h2>}

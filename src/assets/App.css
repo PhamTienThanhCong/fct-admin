@@ -20,6 +20,7 @@ body {
     justify-content:space-between;
     align-items:center;
     margin:20px;
+    transition: width 0.3s ease-in-out;
     color:#fff;
 }
 .logo img{
@@ -53,7 +54,11 @@ body {
     text-align:center;
     padding-top:10px;
 }
-  
+.dropdown{
+    margin-right:20px;
+    cursor: pointer;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
