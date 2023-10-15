@@ -6,26 +6,36 @@ export const ADMIN_SLIDER = [
     key: "1",
     icon: <DashboardTwoTone />,
     link: "/",
-    title: "Dashbroad",
+    title: "dashBroad",
+    subMenu: undefined,
   },
   {
     key: "2",
     icon: <UsergroupAddOutlined />,
     link: "/listUser",
-    title: "User List",
-  },
-  {
-    key: "3",
-    icon: <BellOutlined />,
-    link: "/notification",
-    title: "Notification",
+    title: "user_list",
+    subMenu: {
+      key: "3",
+      link: "/listUser/role",
+      title: "role",
+      groups: ['user_list', 'role']
+    },
   },
   {
     key: "4",
-    icon: <UserOutlined/>,
+    icon: <BellOutlined />,
+    link: "/notification",
+    title: "notification",
+    subMenu: undefined,
+  },
+  {
+    key: "5",
+    icon: <UserOutlined />,
     link: "/profile",
-    title: "Profile",
+    title: "profile",
+    subMenu: undefined,
   },
 ];
+
 
 

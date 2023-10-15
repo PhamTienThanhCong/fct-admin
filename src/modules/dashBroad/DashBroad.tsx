@@ -7,10 +7,14 @@ import {
 } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import "./DashBroad.scss";
+import PageTitle from "../../layouts/components/Pagetitle";
+import { useTranslation } from 'react-i18next'
 
 function DashBroad() {
+  const { t } = useTranslation('translation')
   return (
     <div>
+      <PageTitle title ={t('dashBroad')}/>
       <Row gutter={16}>
         <Col md={6}>
           <div className="dashboard-box">

@@ -1,11 +1,76 @@
 .content-container{
-    margin: 20px;
-    padding: 10px;
-    background-color: "#fff";
+	margin: 20px;
+	padding: 10px;
+	background-color: "#fff";
 }
 .drawer,
 .layout-slider{
-    position: relative;
-    width: 100%;
-    height: 100vh;
+	position: relative;
+	width: 100%;
+	height: 100vh;
 }
+.toggleMenu{
+	position: absolute;
+	bottom: 0;
+	color: #fff;
+	width: 100% !important;
+	color: rgb(0, 0, 0) !important;
+	border-radius: 0px !important;
+	background: rgb(230, 234, 238) !important;
+}
+.ant-btn-icon svg{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+:where(.css-dev-only-do-not-override-1ck3jst).ant-breadcrumb a{
+	font-weight: 600;
+	font-size: 16px;
+}
+.settingFilled{
+	position: absolute;
+	right: 30px !important;
+	bottom: 20px;
+	font-size: 20px;
+	background-color: #fff;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 10px rgba(0, 0, 0,0.2);
+	color: #a9a9a9;
+	cursor: pointer;
+}
+.custom-sidebar{
+	background-color: #fff !important;
+	color: #000 !important;
+}
+.menuSetting {
+	position: absolute;
+	right: 70px;
+	bottom: 30px;
+	width: 200px;
+	border-radius: 10px;
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0;
+	transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+	transform-origin: top;
+	box-shadow: 1px 1px  7px rgba(0, 0, 0,0.2);
+  }
+  .menuSetting.active {
+	max-height: 300px;
+	opacity: 1;
+  }
+
+.light-mode {
+	// background-color: white;
+}
+  
+.dark-mode {
+	background-color: black;
+	color: red;
+  }
+  

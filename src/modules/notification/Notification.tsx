@@ -8,6 +8,8 @@ import { Col, Form, Input, Row } from 'antd';
 import ModalComponent from '../../controllers/common/modal/BaseModal';
 import TextArea from 'antd/es/input/TextArea';
 import { PiWarningFill } from 'react-icons/pi'
+import PageTitle from '../../layouts/components/Pagetitle';
+import { useTranslation } from 'react-i18next';
 
 interface UserRecord {
   key: React.Key;
@@ -16,6 +18,7 @@ interface UserRecord {
   content: string;
 }
 const Notification: React.FC = () => {
+  const { t } = useTranslation('translation')
 	const [isModalVisible, setIsModalVisible] = useState(false)
 	const [openModalDel, setOpenModalDel] = useState(false)
   const [form] = Form.useForm()
@@ -49,12 +52,12 @@ const Notification: React.FC = () => {
 
   const columns = [
     {
-      title: 'Name',
+      title: t('name'),
       dataIndex: 'name',
       width: 200,
     },
     {
-      title: 'Time',
+      title: t('time'),
       dataIndex: 'time',
       width: 200,
 			render: (text: string, record: UserRecord) => (
@@ -62,11 +65,11 @@ const Notification: React.FC = () => {
 			),
     },
     {
-      title: 'Content',
+      title: t('content'),
       dataIndex: 'content',
     },
     {
-      title: 'Action',
+      title: t('action'),
       dataIndex: 'action',
       render: (text: string, record: UserRecord) => (
         <div className="action-buttons-container">
@@ -108,6 +111,7 @@ const Notification: React.FC = () => {
 
 	return (
 		<div>
+      <PageTitle title={t('notification')}/>
       <Table
         columns={columns}
         data={data}
@@ -115,11 +119,11 @@ const Notification: React.FC = () => {
 			<div>
         <ModalComponent
           visible={isModalVisible}
-          title='Trả lời'
+          title={t('reply')}
           onOk={() => form.submit()}
           width='48rem'
           onCancel={handelCancelReply}
-          okText="Lưu"
+          okText={t('save')}
         >
           <Form
             form={form}
@@ -132,24 +136,24 @@ const Notification: React.FC = () => {
             <Row gutter={24}>
               <Col span={12}>
                 <Form.Item
-                  name="username"
-                  label="Tên đăng nhập"
+                  name="name"
+                  label={t('name')}
                 >
                   <Input/>
                 </Form.Item>
               </Col>
 							<Col span={12}>
-								<Form.Item name='time' label='Thời gian'>
+								<Form.Item name='time' label={t('time')}>
 									<Input />
 								</Form.Item>
 							</Col>
 							<Col span={12}>
-								<Form.Item name='content' label='Nội dung'>
+								<Form.Item name='content' label={t('content')}>
 									<Input />
 								</Form.Item>
 							</Col>
 							<Col span={24}>
-              <Form.Item name='reply' label='Trả lời'>
+              <Form.Item name='reply' label={t('reply')}>
                 <TextArea />
               </Form.Item>
             </Col>
@@ -157,14 +161,14 @@ const Notification: React.FC = () => {
           </Form>
         </ModalComponent>
 				<ModalComponent
-          title="Xóa người dùng"
+          title={t('delete_user')}
           visible={openModalDel}
           icon={<PiWarningFill className='icon-warning mt-2' />}
           onOk={() => form.submit()}
           onCancel={handleDeleteUser}
-          okText="Xác nhận"
+          okText={t('confirm')}
         >
-          <p className='text-confirm text-lg text-center mb-10'>Bạn có muốn xóa người dùng này không ?</p>
+          <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
         </ModalComponent>
     	</div>
 		</div>

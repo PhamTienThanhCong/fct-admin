@@ -9,6 +9,7 @@ import './assets/App.css'
 import DashBroad from "./modules/dashBroad/DashBroad";
 import Notification from "./modules/notification/Notification";
 import Profile from "./modules/profile/Profile";
+import Role from "./modules/role/Role";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/listUser" element={<UserContainer />} />
               <Route path="/notification" element={<Notification/>} />
               <Route path="/profile" element={<Profile/>} />
+              <Route path="/listUser/role" element={<Role/>} />
             </Route>
           </Route>
         </Routes>

@@ -21,7 +21,7 @@ body {
     align-items:center;
     margin:20px;
     transition: width 0.3s ease-in-out;
-    color:#fff;
+    color:#000;
 }
 .logo img{
     width:60px;
@@ -58,7 +58,12 @@ body {
     margin-right:20px;
     cursor: pointer;
 }
-
+.pageTitle{
+    font-weight:bold;
+    font-size:28px;
+    color:#000;
+    margin-bottom:15px;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

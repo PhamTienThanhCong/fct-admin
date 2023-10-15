@@ -5,6 +5,8 @@ import CustomButton from "../../controllers/common/custombutton/CustomButton";
 import ModalComponent from "../../controllers/common/modal/BaseModal";
 import AvatarImage from "../../assets/images/BgLoginImage.png";
 import "../profile/Profile.scss";
+import PageTitle from "../../layouts/components/Pagetitle";
+import { useTranslation } from 'react-i18next'
 
 const initialFormData = {
   username: "Vũ Thị Miên",
@@ -14,6 +16,7 @@ const initialFormData = {
 };
 
 const Profile = () => {
+  const { t } = useTranslation('translation')
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [formData, setFormData] = useState(initialFormData);
@@ -56,12 +59,13 @@ const Profile = () => {
 
   return (
     <div className="wrapper">
+      <PageTitle title={t('profile')}/>
       <div className="avatar-profile">
         <img src={AvatarImage} alt="" />
         <h3>{formData.username}</h3>
       </div>
       <div className="info-account">
-        <h3>Account Information</h3>
+        <h3>{t('account_information')}</h3>
         <Table dataSource={dataSource} columns={columns} pagination={false} showHeader={false} />
       </div>
       <div className="action-btn">
@@ -76,11 +80,11 @@ const Profile = () => {
       </div>
       <ModalComponent
         visible={isModalVisible}
-        title="Edit User Information"
+        title={t('edit_user_information')}
         onOk={() => form.submit()}
         width="48rem"
         onCancel={handleCancelEdit}
-        okText="Save"
+        okText={t('save')}
       >
         <Form
           form={form}
