@@ -43,7 +43,7 @@ const BreadcrumbComponent: React.FC<BreadcrumbComponentProps> = ({ adminSlider }
 					<Breadcrumb.Item
 						key={item.key}
 						className={item.link === currentPath ? "active-breadcrumb" : ""}>
-						<Link to={item.link}>{t(item.title)}</Link>
+						<Link className="breadcrumb_header" to={item.link}>{t(item.title)}</Link>
 					</Breadcrumb.Item>
 				))}
 			</Breadcrumb>

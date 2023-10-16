@@ -29,9 +29,9 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, 
   return (
     <Modal
       title={
-        <div className={`flex items-center ${icon ? 'flex-col' : ''}`}>
+        <div style={{display:'flex',alignItems:'center'}}>
           {icon}
-          <div className={`text-3xl ${icon ? 'title-confirm pt-5' : ''}`}>{title}</div>
+          <div style={{marginLeft:'10px'}}>{title}</div>
         </div>
       }
       open={visible}
@@ -40,7 +40,7 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, 
       destroyOnClose
       closable={false}
       footer={[
-        <div className='flex justify-end' key='button'>
+        <div className='action_button' key='button'>
           <CustomButton
             key='cancel'
             className='button-cancel'

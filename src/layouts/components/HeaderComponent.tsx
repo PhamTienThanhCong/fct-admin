@@ -52,14 +52,14 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 
   return (
     <>
-      <Header style={{ padding: 0, background: "#fff" }}>
+      <Header className="header" style={{ padding: 0, background: "#fff" }}>
         <Row justify="space-between">
           <Col md={16}>
-            <BreadcrumbComponent adminSlider={ADMIN_SLIDER} />
+            <BreadcrumbComponent  adminSlider={ADMIN_SLIDER} />
           </Col>
           <Col md={4}>
             <Badge count={30}>
-              <a href="/notification" style={{ fontSize: "23px", color: "#333" }}>
+              <a className="icon_noti" href="/notification" style={{ fontSize: "23px", color: "#333" }}>
                 <Tooltip title="Thông báo" placement="bottom">
                   <BellOutlined />
                 </Tooltip>
@@ -69,7 +69,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
           <Col md={4}>
             <Dropdown overlay={menu} trigger={["click"]} className="dropdown">
               <div className="account-header">
-                <Avatar size="default" icon={<UserOutlined />} onClick={handleAvatarClick} />
+                <Avatar className="icon_admin" size="default" icon={<UserOutlined />} onClick={handleAvatarClick} />
                 <span
                   style={{
                     marginLeft: "10px",

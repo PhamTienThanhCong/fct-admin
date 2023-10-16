@@ -3,6 +3,9 @@
 	padding: 10px;
 	background-color: "#fff";
 }
+.ant-btn{
+  display: flex;
+}
 .drawer,
 .layout-slider{
 	position: relative;
@@ -18,11 +21,7 @@
 	border-radius: 0px !important;
 	background: rgb(230, 234, 238) !important;
 }
-.ant-btn-icon svg{
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
-}
+
 :where(.css-dev-only-do-not-override-1ck3jst).ant-breadcrumb a{
 	font-weight: 600;
 	font-size: 16px;
@@ -59,18 +58,51 @@
 	transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 	transform-origin: top;
 	box-shadow: 1px 1px  7px rgba(0, 0, 0,0.2);
-  }
-  .menuSetting.active {
-	max-height: 300px;
-	opacity: 1;
-  }
-
-.light-mode {
-	// background-color: white;
 }
-  
+.menuSetting.active {
+max-height: 300px;
+opacity: 1;
+}
+
 .dark-mode {
-	background-color: black;
-	color: red;
+  .header,
+  .Menu_slideBar,
+  .content-container,
+  .ant-layout-footer,
+  .wrapper,
+  .custom-sidebar{
+    background-color: #121212 !important;
+    color: #ccc !important;
+  }
+  .toggleMenu{
+    background-color: #222222 !important;
+  }
+  .pageTitle,
+  .ant-btn-icon svg{
+    color: #a9a9a9 !important;
+  }
+  .icon_admin,
+  .breadcrumb_header,
+  .icon_noti,
+  .logo h2{
+    color: #ccc !important;
+  }
+  .ant-table,
+  .info-account{
+    color: #ccc !important;
+    background: #222222 !important;
+  }
+  .ant-layout{
+    background: #222222 !important;
+  }
+  .pageTitle {
+    margin-bottom: 0 !important;
   }
   
+}
+.action_button{
+  position: absolute;
+  display: flex;
+  right: 10px;
+  bottom: 10px;
+}

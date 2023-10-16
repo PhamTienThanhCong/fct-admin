@@ -45,7 +45,7 @@ const SliderBarComponents = (props: SliderBarComponentsProps) => {
           {!collapsed && <h2 style={{ fontSize: "25px" }}>Finding Car</h2>}
         </div>
         <Menu
-          theme="light"
+          className='Menu_slideBar'
           mode="inline"
           defaultSelectedKeys={menuSelected === "" ? ["1"] : [menuSelectedKey]}
         >
