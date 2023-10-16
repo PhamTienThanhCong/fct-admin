@@ -20,5 +20,6 @@
     "en_language" : "Tiếng anh",
     "vi_language" : "Tiếng việt",
     "dark" : "Tối",
-    "light" : "Sáng"
+    "light" : "Sáng",
+    "list_user" : "Danh sách người dùng"
 }

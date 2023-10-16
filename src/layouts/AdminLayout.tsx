@@ -18,7 +18,7 @@ const AdminLayout: React.FC = () => {
 
   return (
     <Layout className="layout-slider">
-      <SliderBarComponents toggleMenu={toggleMenu} collapsed={collapsed} menuItems={ADMIN_SLIDER} />
+      <SliderBarComponents menuItems={ADMIN_SLIDER} toggleMenu={toggleMenu} collapsed={collapsed} /> 
       <Layout style={{ overflowY: 'auto' }}>
         <HeaderComponent collapsed={collapsed} toggleMenu={toggleMenu} location={window.location} />
         <Content className="content-container">

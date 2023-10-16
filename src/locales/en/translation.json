@@ -18,5 +18,6 @@
     "en_language" : "English",
     "vi_language" : "Vietnamese",
     "dark" : "dark",
-    "light" : "light"
+    "light" : "light",
+    "list_user" : "List User"
 }

@@ -20,7 +20,7 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/" element={<DashBroad/>} />
-              <Route path="/listUser" element={<UserContainer />} />
+              <Route path="/listUser/User" element={<UserContainer />} />
               <Route path="/notification" element={<Notification/>} />
               <Route path="/profile" element={<Profile/>} />
               <Route path="/listUser/role" element={<Role/>} />

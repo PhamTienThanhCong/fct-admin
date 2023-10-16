@@ -12,11 +12,11 @@ interface MenuItem {
 	key: string;
 	link: string;
 	title: string;
-	subMenu?: MenuItem | null;
+	subMenu?: MenuItem[];
 }
 
 const BreadcrumbComponent: React.FC<BreadcrumbComponentProps> = ({ adminSlider }) => {
-  const { t } = useTranslation('translation')
+	const { t } = useTranslation('translation')
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const breadcrumbItems: MenuItem[] = [];
@@ -29,7 +29,7 @@ const BreadcrumbComponent: React.FC<BreadcrumbComponentProps> = ({ adminSlider }
 				return;
 			} else if (item.subMenu) {
 				// Đệ quy để tìm breadcrumb của menu con và truyền vào breadcrumb của menu cha
-				findBreadcrumb([item.subMenu], path, [...parentBreadcrumb, item]);
+				findBreadcrumb(item.subMenu, path, [...parentBreadcrumb, item]);
 			}
 		}
 	};
