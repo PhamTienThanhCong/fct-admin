@@ -19,7 +19,7 @@ const ChangeAvata = () => {
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value)
   }
-  
+
   const handleCancel = () => setPreviewOpen(false)
 
   const handleChange:UploadProps['onChange'] = ({ fileList: newFileList }) =>{

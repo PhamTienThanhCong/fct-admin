@@ -34,5 +34,8 @@
     "current_avatar" : "Current Profile Picture",
     "default_avatar" : "Use Default Avatar",
     "upload_file" : "Upload file",
-    "select_image": "Drop image (JPG, PNG) files here or Browse"
+    "select_image": "Drop image (JPG, PNG) files here or Browse",
+    "full_name" : "Full name",
+    "minimum_length_characters" : "Minimum length is 3 characters",
+    "phone_number_isvalid" : "Phone number is valid !"
 }

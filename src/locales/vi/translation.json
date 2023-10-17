@@ -36,5 +36,8 @@
     "current_avatar" : "Ảnh hồ sơ hiện tại",
     "default_avata" : "Sử dụng ảnh đại diện mặc định",
     "upload_file" : "Cập nhật Avatar",
-    "select_image": "Thả tệp hình ảnh (JPG, PNG) vào đây hoặc chọn ảnh"
+    "select_image": "Thả tệp hình ảnh (JPG, PNG) vào đây hoặc chọn ảnh",
+    "full_name" : "Họ và Tên",
+    "minimum_length_characters" : "Độ dài tối thiểu là  3 kí tự",
+    "phone_number_isvalid" : "Số điện thoại không hợp lệ"
 }
