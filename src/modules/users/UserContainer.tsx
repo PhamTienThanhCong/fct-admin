@@ -7,6 +7,8 @@ import { IoMdAdd } from 'react-icons/io'
 import ModalComponent from '../../controllers/common/modal/BaseModal';
 import { PiWarningFill } from 'react-icons/pi'
 import { Col, Form, Input, Row } from 'antd';
+import { useTranslation } from 'react-i18next';
+import PageTitle from '../../layouts/components/Pagetitle';
 interface UserRecord {
   key: React.Key;
   name: string;
@@ -15,6 +17,7 @@ interface UserRecord {
 }
 
 const UserContainer: React.FC = () => {
+  const { t } = useTranslation('translation')
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [openModalDel, setOpenModalDel] = useState(false)
   const [form] = Form.useForm()
@@ -104,10 +107,13 @@ const UserContainer: React.FC = () => {
   return (
     <div>
       <div className='button-add-user'>
+        <div>
+          <PageTitle title="Danh sách người dùng"/>
+        </div>
         <CustomButton
           style={{ textAlign: 'center' }}
           type='primary'
-          item="Thêm người dùng"
+          item={t("add_user")}
           icon={<IoMdAdd fontSize={16} />}
           onClick={handleAddUser}
         />
@@ -119,11 +125,11 @@ const UserContainer: React.FC = () => {
       <div>
         <ModalComponent
           visible={isModalVisible}
-          title='Thêm người dùng'
+          title={t("add_user")}
           onOk={() => form.submit()}
           width='48rem'
           onCancel={handelCancelCreateUser}
-          okText="Lưu"
+          okText={t('save')}
         >
           <Form
             form={form}
@@ -137,16 +143,16 @@ const UserContainer: React.FC = () => {
               <Col span={12}>
                 <Form.Item
                   name="username"
-                  label="Tên đăng nhập"
+                  label={t('name')}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
-                      message: `${'Tên người dùng hoặc địa chỉ email'}${'không được để trống'}`
+                      message: `${t('rule_user')}${t(' not_empty')}`
                     },
                     {
                       max: 50,
-                      message: `${'Tên người dùng hoặc địa chỉ email'}${'Tên quá dài'}`
+                      message: `${t('rule_user')}${t(' name_too_long')}`
                     }
                   ]}
                 >
@@ -155,17 +161,17 @@ const UserContainer: React.FC = () => {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  name="username"
-                  label="Tên đăng nhập"
+                  name="age"
+                  label={t('age')}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
-                      message: `${'Tên người dùng hoặc địa chỉ email'}${'không được để trống'}`
+                      message: `${t('rule_user')}${t(' not_empty')}`
                     },
                     {
-                      max: 50,
-                      message: `${'Tên người dùng hoặc địa chỉ email'}${'Tên quá dài'}`
+                      max: 3,
+                      message: `${t('rule_user')}${t(' name_too_long')}`
                     }
                   ]}
                 >
@@ -175,16 +181,16 @@ const UserContainer: React.FC = () => {
               <Col span={12}>
               <Form.Item
                 name='password'
-                label='Mật khẩu'
+                label={t('password')}
                 rules={[
                   {
                     required: true,
                     whitespace: true,
-                    message: `${'Mật khẩu'}${'không được để trống'}`
+                    message: `${t('password')}${t(' not_empty')}`
                   },
                   {
                     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    message: 'Không được để trống'
+                    message:t('not_empty')
                   }
                 ]}
               >
@@ -192,12 +198,12 @@ const UserContainer: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name='mobile' label='Số điện thoại'>
+              <Form.Item name='mobile' label={t('phone_number')}>
                 <Input />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name='address' label='Địa chỉ'>
+              <Form.Item name='address' label={t('address')}>
                 <Input />
               </Form.Item>
             </Col>
@@ -205,14 +211,14 @@ const UserContainer: React.FC = () => {
           </Form>
         </ModalComponent>
         <ModalComponent
-          title="Xóa người dùng"
+          title={t('delete_user')}
           visible={openModalDel}
           icon={<PiWarningFill className='icon-warning mt-2' />}
           onOk={() => form.submit()}
           onCancel={handleDeleteUser}
-          okText="Xác nhận"
+          okText={t('confirm')}
         >
-          <p className='text-confirm text-lg text-center mb-10'>Bạn có muốn xóa người dùng này không ?</p>
+          <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
         </ModalComponent>
       </div>
     </div>

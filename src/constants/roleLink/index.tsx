@@ -38,8 +38,8 @@ export const ADMIN_SLIDER = [
 	{
 		key: "5",
 		icon: <UserOutlined />,
-		link: "/profile",
-		title: "profile",
+		link: "/myAccount",
+		title: "account",
 		subMenu: undefined,
 	},
 ];

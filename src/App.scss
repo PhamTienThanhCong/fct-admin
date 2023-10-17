@@ -1,10 +1,11 @@
 .content-container{
-	margin: 20px;
+	margin:  0 !important;
 	padding: 10px;
 	background-color: "#fff";
 }
 .ant-btn{
   display: flex;
+  align-items: center;
 }
 .drawer,
 .layout-slider{
@@ -20,8 +21,13 @@
 	color: rgb(0, 0, 0) !important;
 	border-radius: 0px !important;
 	background: rgb(230, 234, 238) !important;
+	display: flex;
+	align-items: center;
 }
-
+.toggleMenu svg{
+	position: absolute;
+	right: 20px;
+}
 :where(.css-dev-only-do-not-override-1ck3jst).ant-breadcrumb a{
 	font-weight: 600;
 	font-size: 16px;
@@ -106,4 +112,15 @@ opacity: 1;
   display: flex;
   right: 10px;
   bottom: 10px;
+}
+.ant-layout-sider-children ul {
+	border-inline-end: none !important;
+}
+.ant-menu{
+	border-inline-end:none !important;
+}
+.ant-upload-list-item-actions{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

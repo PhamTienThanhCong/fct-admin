@@ -31,7 +31,7 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, 
       title={
         <div style={{display:'flex',alignItems:'center'}}>
           {icon}
-          <div style={{marginLeft:'10px'}}>{title}</div>
+          <div>{title}</div>
         </div>
       }
       open={visible}

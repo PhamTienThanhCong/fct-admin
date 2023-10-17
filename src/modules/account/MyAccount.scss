@@ -1,0 +1,41 @@
+.main-container{
+    padding: 10px;
+}
+.view-container{
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 20px;
+}
+.title-avata{
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+.wrapper_changeAvata{
+   margin-left: 20px;
+    .img-avata {
+       text-align: center;
+    }
+    .content-changeAvata{
+        margin-top: 30px;
+    }
+    .upload-avatar {
+        margin-top: 10px;
+      
+        .ant-upload {
+          width: 100% !important;
+          height: 60px !important;
+        }
+      
+        .ant-tooltip {
+          display: none !important;
+        }
+      
+        .ant-upload-list-item-container {
+          width: 150px !important;
+          height: 150px !important;
+        }
+      }
+}
