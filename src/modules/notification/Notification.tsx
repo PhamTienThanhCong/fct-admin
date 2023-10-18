@@ -110,67 +110,69 @@ const Notification: React.FC = () => {
 	}
 
 	return (
-		<div>
-      <PageTitle title={t('notification')}/>
-      <Table
-        columns={columns}
-        data={data}
-      />
-			<div>
-        <ModalComponent
-          visible={isModalVisible}
-          title={t('reply')}
-          onOk={() => form.submit()}
-          width='48rem'
-          onCancel={handelCancelReply}
-          okText={t('save')}
-        >
-          <Form
-            form={form}
-            name='validateOnly'
-            onFinish={handleSubmit}
-            layout='vertical'
-            autoComplete='off'
-            className='form-add-edit'
+		<div className='wrapper_noti'>
+      <div className='item_noti'>
+        <PageTitle title={t('notification')}/>
+        <Table
+          columns={columns}
+          data={data}
+        />
+  			<div>
+          <ModalComponent
+            visible={isModalVisible}
+            title={t('reply')}
+            onOk={() => form.submit()}
+            width='48rem'
+            onCancel={handelCancelReply}
+            okText={t('save')}
           >
-            <Row gutter={24}>
-              <Col span={12}>
-                <Form.Item
-                  name="name"
-                  label={t('name')}
-                >
-                  <Input/>
+            <Form
+              form={form}
+              name='validateOnly'
+              onFinish={handleSubmit}
+              layout='vertical'
+              autoComplete='off'
+              className='form-add-edit'
+            >
+              <Row gutter={24}>
+                <Col span={12}>
+                  <Form.Item
+                    name="name"
+                    label={t('name')}
+                  >
+                    <Input/>
+                  </Form.Item>
+                </Col>
+  							<Col span={12}>
+  								<Form.Item name='time' label={t('time')}>
+  									<Input />
+  								</Form.Item>
+  							</Col>
+  							<Col span={12}>
+  								<Form.Item name='content' label={t('content')}>
+  									<Input />
+  								</Form.Item>
+  							</Col>
+  							<Col span={24}>
+                <Form.Item name='reply' label={t('reply')}>
+                  <TextArea />
                 </Form.Item>
               </Col>
-							<Col span={12}>
-								<Form.Item name='time' label={t('time')}>
-									<Input />
-								</Form.Item>
-							</Col>
-							<Col span={12}>
-								<Form.Item name='content' label={t('content')}>
-									<Input />
-								</Form.Item>
-							</Col>
-							<Col span={24}>
-              <Form.Item name='reply' label={t('reply')}>
-                <TextArea />
-              </Form.Item>
-            </Col>
-            </Row>
-          </Form>
-        </ModalComponent>
-				<ModalComponent
-          title={t('delete_user')}
-          visible={openModalDel}
-          icon={<PiWarningFill className='icon-warning mt-2' />}
-          onOk={() => form.submit()}
-          onCancel={handleDeleteUser}
-          okText={t('confirm')}
-        >
-          <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
-        </ModalComponent>
-    	</div>
+              </Row>
+            </Form>
+          </ModalComponent>
+  				<ModalComponent
+            title={t('delete_user')}
+            visible={openModalDel}
+            icon={<PiWarningFill className='icon-warning' />}
+            onOk={() => form.submit()}
+            onCancel={handleDeleteUser}
+            okText={t('confirm')}
+          >
+            <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
+          </ModalComponent>
+      	</div>
+      </div>
 		</div>
 	);
 }

@@ -36,7 +36,7 @@ const SliderBarComponents = (props: SliderBarComponentsProps) => {
     <Sider className="drawer custom-sidebar" trigger={null} collapsible collapsed={collapsed} width={250}>
       <div className="logo">
         <img src={Logo} alt="" className={collapsed ? "collapsed-logo" : ""} />
-        {!collapsed && <h2 style={{ fontSize: "25px" }}>Finding Car</h2>}
+        {!collapsed && <p style={{ fontSize: "25px",fontWeight:'600' }}>Finding Car</p>}
       </div>
       <Menu
         className='Menu_slideBar'

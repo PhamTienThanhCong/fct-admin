@@ -105,121 +105,123 @@ const UserContainer: React.FC = () => {
     setOpenModalDel(false)
   }
   return (
-    <div>
-      <div className='button-add-user'>
-        <div>
-          <PageTitle title="Danh sách người dùng"/>
+    <div className='wrapper_user'>
+      <div className='item_user'>
+        <div className='header_table_user'>
+          <PageTitle title={t('list_user')}/>
+          <div className='button-add-user'>
+            <CustomButton
+              style={{ textAlign: 'center' }}
+              type='primary'
+              item={t("add_user")}
+              icon={<IoMdAdd fontSize={16} />}
+              onClick={handleAddUser}
+            />
+          </div>
         </div>
-        <CustomButton
-          style={{ textAlign: 'center' }}
-          type='primary'
-          item={t("add_user")}
-          icon={<IoMdAdd fontSize={16} />}
-          onClick={handleAddUser}
+        <Table
+          columns={columns}
+          data={data}
         />
-      </div>
-      <Table
-        columns={columns}
-        data={data}
-      />
-      <div>
-        <ModalComponent
-          visible={isModalVisible}
-          title={t("add_user")}
-          onOk={() => form.submit()}
-          width='48rem'
-          onCancel={handelCancelCreateUser}
-          okText={t('save')}
-        >
-          <Form
-            form={form}
-            name='validateOnly'
-            onFinish={handleSubmit}
-            layout='vertical'
-            autoComplete='off'
-            className='form-add-edit'
+        <div>
+          <ModalComponent
+            visible={isModalVisible}
+            title={t("add_user")}
+            onOk={() => form.submit()}
+            width='48rem'
+            onCancel={handelCancelCreateUser}
+            okText={t('save')}
           >
-            <Row gutter={24}>
-              <Col span={12}>
+            <Form
+              form={form}
+              name='validateOnly'
+              onFinish={handleSubmit}
+              layout='vertical'
+              autoComplete='off'
+              className='form-add-edit'
+            >
+              <Row gutter={24}>
+                <Col span={12}>
+                  <Form.Item
+                    name="username"
+                    label={t('name')}
+                    rules={[
+                      {
+                        required: true,
+                        whitespace: true,
+                        message: `${t('rule_user')}${t(' not_empty')}`
+                      },
+                      {
+                        max: 50,
+                        message: `${t('rule_user')}${t(' name_too_long')}`
+                      }
+                    ]}
+                  >
+                    <Input/>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="age"
+                    label={t('age')}
+                    rules={[
+                      {
+                        required: true,
+                        whitespace: true,
+                        message: `${t('rule_user')}${t(' not_empty')}`
+                      },
+                      {
+                        max: 3,
+                        message: `${t('rule_user')}${t(' name_too_long')}`
+                      }
+                    ]}
+                  >
+                    <Input/>
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
                 <Form.Item
-                  name="username"
-                  label={t('name')}
+                  name='password'
+                  label={t('password')}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
-                      message: `${t('rule_user')}${t(' not_empty')}`
+                      message: `${t('password')}${t(' not_empty')}`
                     },
                     {
-                      max: 50,
-                      message: `${t('rule_user')}${t(' name_too_long')}`
+                      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message:t('not_empty')
                     }
                   ]}
                 >
-                  <Input/>
+                  <Input.Password />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item
-                  name="age"
-                  label={t('age')}
-                  rules={[
-                    {
-                      required: true,
-                      whitespace: true,
-                      message: `${t('rule_user')}${t(' not_empty')}`
-                    },
-                    {
-                      max: 3,
-                      message: `${t('rule_user')}${t(' name_too_long')}`
-                    }
-                  ]}
-                >
-                  <Input/>
+                <Form.Item name='mobile' label={t('phone_number')}>
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
-              <Form.Item
-                name='password'
-                label={t('password')}
-                rules={[
-                  {
-                    required: true,
-                    whitespace: true,
-                    message: `${t('password')}${t(' not_empty')}`
-                  },
-                  {
-                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    message:t('not_empty')
-                  }
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name='mobile' label={t('phone_number')}>
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name='address' label={t('address')}>
-                <Input />
-              </Form.Item>
-            </Col>
-            </Row>
-          </Form>
-        </ModalComponent>
-        <ModalComponent
-          title={t('delete_user')}
-          visible={openModalDel}
-          icon={<PiWarningFill className='icon-warning mt-2' />}
-          onOk={() => form.submit()}
-          onCancel={handleDeleteUser}
-          okText={t('confirm')}
-        >
-          <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
-        </ModalComponent>
+                <Form.Item name='address' label={t('address')}>
+                  <Input />
+                </Form.Item>
+              </Col>
+              </Row>
+            </Form>
+          </ModalComponent>
+          <ModalComponent
+            title={t('delete_user')}
+            visible={openModalDel}
+            icon={<PiWarningFill className='icon-warning mt-2' />}
+            onOk={() => form.submit()}
+            onCancel={handleDeleteUser}
+            okText={t('confirm')}
+          >
+            <p className='text-confirm text-lg text-center mb-10'>{t('confirm_delete_user')}</p>
+          </ModalComponent>
+        </div>
       </div>
     </div>
   );

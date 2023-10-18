@@ -38,7 +38,7 @@ const BreadcrumbComponent: React.FC<BreadcrumbComponentProps> = ({ adminSlider }
 
 	return (
 		<>
-			<Breadcrumb style={{ margin: "20px 20px" }}>
+			<Breadcrumb style={{ margin: "20px 0" }}>
 				{breadcrumbItems.map((item, index) => (
 					<Breadcrumb.Item
 						key={item.key}

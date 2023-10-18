@@ -47,7 +47,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 	const menu = (
 		<Menu>
 			<Menu.Item key="1" icon={<UserOutlined />}>
-				<a href="/profile">Profile</a>
+				<a href="/myAccount">Account</a>
 			</Menu.Item>
 			<Menu.Item key="2" icon={<LogoutOutlined />}>
 				<p onClick={showConfirmLogout}>Logout</p>
@@ -83,15 +83,15 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 									icon={<UserOutlined />}
 									onClick={handleAvatarClick}
 								/>
-								<span
+								<p
 									style={{
 										marginLeft: "10px",
 										fontSize: "20px",
-										fontWeight: "bold",
+										fontWeight: "600",
 										whiteSpace: "nowrap",
 									}}>
 									Vũ Thị miên
-								</span>
+								</p>
 							</div>
 						</Dropdown>
 					</Col>

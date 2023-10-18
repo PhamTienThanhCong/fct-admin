@@ -39,5 +39,12 @@
     "select_image": "Thả tệp hình ảnh (JPG, PNG) vào đây hoặc chọn ảnh",
     "full_name" : "Họ và Tên",
     "minimum_length_characters" : "Độ dài tối thiểu là  3 kí tự",
-    "phone_number_isvalid" : "Số điện thoại không hợp lệ"
+    "phone_number_isvalid" : "Số điện thoại không hợp lệ",
+    "old_pass" : "Mật khẩu cũ",
+    "new_pass" : "Mật khẩu mới",
+    "your_new_password" : " Vui lòng nhập mật khẩu mới của bạn",
+    "confirm_pass" : "Nhập lại mật khẩu mới",
+    "confirm_new_password" : "Vui lòng xác nhận mật khẩu mới của bạn",
+    "two_passwords_not_match" : "Hai mật khẩu không khớp",
+    "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

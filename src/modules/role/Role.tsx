@@ -2,6 +2,7 @@ import { Form } from "antd"
 import PageTitle from "../../layouts/components/Pagetitle"
 import { useTranslation } from "react-i18next"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
+import '../role/Role.scss'
 interface RoleRecord {
   key: React.Key,
   role : string,
@@ -60,8 +61,10 @@ const Role: React.FC = () => {
   ]
 
 	return(
-		<div>
-	    <PageTitle title="Vai Trò"/>
+		<div className="wapper_role">
+	    <div className="item_role">
+        <PageTitle title="Vai Trò"/>
+      </div>
 	  </div>
 	)
 }

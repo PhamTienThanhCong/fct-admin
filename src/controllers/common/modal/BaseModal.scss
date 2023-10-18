@@ -1,21 +1,28 @@
-// .button-cancel {
-//     background-color: $bgButtonCancel !important;
-//     border-color: $bgButtonCancel !important;
-//     color: $lightbg !important;
-// }
+.button-cancel {
+    background-color: #6c5dd3 !important;
+    border-color: #6c5dd3 !important;
+    color: #fff !important;
+}
 
-// .button-cancel:hover {
-//     background-color: $bgButtonCancelHover !important;
-//     border-color: $bgButtonCancelHover !important;
-// }
+.button-cancel:hover {
+    background-color: #5c4fb3 !important;
+    border-color: #5c4fb3 !important;
+}
 
-// .button-submit {
-//     background-color: $colorIconAction !important;
-//     border-color: $colorIconAction !important;
-//     color: $lightbg !important;
-// }
+.button-submit {
+    background-color: #355dff !important;
+    border-color: #355dff !important;
+    color: #fff !important;
+}
 
-// .button-submit:hover {
-//     background-color: $bgButtonSubmitHover !important;
-//     border-color: $bgButtonSubmitHover !important;
-// }
+.button-submit:hover {
+    background-color: #2d4fd9 !important;
+    border-color: #2d4fd9 !important;
+}
+.action_button{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: right;
+}

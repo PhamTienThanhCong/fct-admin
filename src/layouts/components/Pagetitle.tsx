@@ -1,12 +1,16 @@
 import React from 'react';
+import { Typography } from 'antd';
 
+const { Title } = Typography;
 interface PageTitleProps {
   title: string; 
 }
 
-export const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
+const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
   return (
-	  <div className='pageTitle'>{title}</div>
+    <Title level={3} className='pageTitle'>
+      {title}
+    </Title>
   );
 }
 
