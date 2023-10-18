@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import '../notification/Notification.scss';
-import Table  from '../../controllers/common/table/Table';
 import { DeleteOutlined } from '@ant-design/icons';
 import { TbArrowForwardUp } from 'react-icons/tb';
 import moment from 'moment';
@@ -10,6 +9,7 @@ import TextArea from 'antd/es/input/TextArea';
 import { PiWarningFill } from 'react-icons/pi'
 import PageTitle from '../../layouts/components/Pagetitle';
 import { useTranslation } from 'react-i18next';
+import DynamicList from '../../controllers/common/customList/DynamicList';
 
 interface UserRecord {
   key: React.Key;
@@ -22,6 +22,10 @@ const Notification: React.FC = () => {
 	const [isModalVisible, setIsModalVisible] = useState(false)
 	const [openModalDel, setOpenModalDel] = useState(false)
   const [form] = Form.useForm()
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const [isSearch, setIsSearch] = useState(false);
+
   const data: UserRecord[] = [
     {
       key: '1',
@@ -40,6 +44,36 @@ const Notification: React.FC = () => {
       name: 'Notification 3',
       time: new Date(2023, 9, 10, 14, 30),
       content: 'Nội dung thông báo 3',
+    },
+    {
+      key: '4',
+      name: 'Notification 4',
+      time: new Date(2023, 9, 10, 14, 30),
+      content: 'Nội dung thông báo 4',
+    },
+    {
+      key: '4',
+      name: 'Notification 4',
+      time: new Date(2023, 9, 10, 14, 30),
+      content: 'Nội dung thông báo 4',
+    },
+    {
+      key: '4',
+      name: 'Notification 4',
+      time: new Date(2023, 9, 10, 14, 30),
+      content: 'Nội dung thông báo 4',
+    },
+    {
+      key: '4',
+      name: 'Notification 4',
+      time: new Date(2023, 9, 10, 14, 30),
+      content: 'Nội dung thông báo 4',
+    },
+    {
+      key: '4',
+      name: 'Notification 4',
+      time: new Date(2023, 9, 10, 14, 30),
+      content: 'Nội dung thông báo 4',
     },
     {
       key: '4',
@@ -113,9 +147,17 @@ const Notification: React.FC = () => {
 		<div className='wrapper_noti'>
       <div className='item_noti'>
         <PageTitle title={t('notification')}/>
-        <Table
-          columns={columns}
-          data={data}
+        <DynamicList
+          keyId='key'
+          listData={data}
+          listColumn={columns}
+          pageNumber={pageNumber}
+          pageSize={pageSize}
+          totalCount={data.length}
+          onPageChange={(pageNumber, pageSize) => {
+            setPageNumber(pageNumber);
+            setPageSize(pageSize);
+          }}
         />
   			<div>
           <ModalComponent
