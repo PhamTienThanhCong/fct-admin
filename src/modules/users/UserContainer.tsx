@@ -154,12 +154,12 @@ const UserContainer: React.FC = () => {
     {
       title: 'Name',
       dataIndex: 'name',
-      width: 200,
+      width: 300,
     },
     {
       title: 'Age',
       dataIndex: 'age',
-      width: 200,
+      width: 300,
     },
     {
       title: 'Address',
@@ -280,11 +280,11 @@ const UserContainer: React.FC = () => {
                     {
                       required: true,
                       whitespace: true,
-                      message: `${t('rule_user')}${t(' not_empty')}`
+                      message: `${t('rule_user')}${t('not_empty')}`
                     },
                     {
                       max: 50,
-                      message: `${t('rule_user')}${t(' name_too_long')}`
+                      message: `${t('rule_user')}${t('name_too_long')}`
                     }
                   ]}
                 >
@@ -299,11 +299,11 @@ const UserContainer: React.FC = () => {
                     {
                       required: true,
                       whitespace: true,
-                      message: `${t('rule_user')}${t(' not_empty')}`
+                      message: `${t('rule_user')}${t('not_empty')}`
                     },
                     {
                       max: 3,
-                      message: `${t('rule_user')}${t(' name_too_long')}`
+                      message: `${t('rule_user')}${t('name_too_long')}`
                     }
                   ]}
                 >
@@ -318,7 +318,7 @@ const UserContainer: React.FC = () => {
                   {
                     required: true,
                     whitespace: true,
-                    message: `${t('password')}${t(' not_empty')}`
+                    message: `${t('password')}${t('not_empty')}`
                   },
                   {
                     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,

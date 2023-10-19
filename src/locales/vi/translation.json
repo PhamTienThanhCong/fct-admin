@@ -23,7 +23,7 @@
     "list_user" : "Danh sách người dùng",
     "add_user" : "Thêm người dùng",
     "rule_user" : "Tên người dùng hoặc địa chỉ email",
-    "not_empty" : "Không được để trống",
+    "not_empty" : " không được để trống",
     "name_too_long" : "Tên quá dài",
     "age" : "Tuổi",
     "password" : "Mật khẩu",
@@ -48,5 +48,7 @@
     "two_passwords_not_match" : "Hai mật khẩu không khớp",
     "search" : "Tìm kiếm",
     "manage_user" : "Quản lý người dùng",
+    "add_role" : "Thêm vai trò",
+    "code" : " Mã vai trò",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

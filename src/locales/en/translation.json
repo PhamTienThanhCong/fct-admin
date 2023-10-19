@@ -45,6 +45,8 @@
     "confirm_new_password" : "Please confirm your new password ",
     "two_passwords_not_match" : "The two passwords do not match",
     "search" : "Search",
+    "add_role" : "Add role",
     "manage_user" : "Manage user",
+    "code" : "Code",
     "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
 }
