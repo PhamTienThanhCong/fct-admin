@@ -47,5 +47,6 @@
     "confirm_new_password" : "Vui lòng xác nhận mật khẩu mới của bạn",
     "two_passwords_not_match" : "Hai mật khẩu không khớp",
     "search" : "Tìm kiếm",
+    "manage_user" : "Quản lý người dùng",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

@@ -1,172 +1,188 @@
-.logo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:20px;
+.logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
     transition: width 0.3s ease-in-out;
-    color:#000;
+    color: #000;
 }
-.logo img{
-	margin-left: -10px;
-	margin-right: -10px;
-    width:60px;
-    height:50px;
-    background-size:cover;
+.logo img {
+    margin-left: -10px;
+    margin-right: -10px;
+    width: 60px;
+    height: 50px;
+    background-size: cover;
 }
 
-.content-container{
-	margin:  0 !important;
-	padding: 10px;
-	background-color: "#fff";
+.content-container {
+    margin: 0 !important;
+    padding: 10px;
+    background-color: "#fff";
 }
-.ant-btn{
-  display: flex;
-  align-items: center;
+.ant-btn {
+    display: flex;
+    align-items: center;
 }
 .drawer,
-.layout-slider{
-	position: relative;
-	width: 100%;
-	height: 100vh;
+.layout-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }
-.toggleMenu{
-	position: absolute;
-	bottom: 0;
-	color: #fff;
-	width: 100% !important;
-	color: rgb(0, 0, 0) !important;
-	border-radius: 0px !important;
-	background: rgb(230, 234, 238) !important;
-	display: flex;
-	align-items: center;
+.toggleMenu {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    width: 100% !important;
+    color: rgb(0, 0, 0) !important;
+    border-radius: 0px !important;
+    background: rgb(230, 234, 238) !important;
+    display: flex;
+    align-items: center;
 }
-.toggleMenu svg{
-	position: absolute;
-	right: 20px;
+.toggleMenu svg {
+    position: absolute;
+    right: 20px;
 }
-:where(.css-dev-only-do-not-override-1ck3jst).ant-breadcrumb a{
-	font-weight: 600;
-	font-size: 16px;
+.ant-breadcrumb  {
+    font-weight: 600;
+    font-size: 16px;
 }
-.settingFilled{
-	position: absolute;
-	right: 30px !important;
-	bottom: 20px;
-	font-size: 20px;
-	background-color: #fff;
-	height: 40px;
-	width: 40px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-shadow: 0 0 10px rgba(0, 0, 0,0.2);
-	color: #a9a9a9;
-	cursor: pointer;
+.settingFilled {
+    position: absolute;
+    right: 30px !important;
+    bottom: 20px;
+    font-size: 20px;
+    background-color: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #a9a9a9;
+    cursor: pointer;
 }
-.custom-sidebar{
-	background-color: #fff !important;
-	color: #000 !important;
+.custom-sidebar {
+    background-color: #fff !important;
+    color: #000 !important;
 }
 .menuSetting {
-	position: absolute;
-	right: 70px;
-	bottom: 30px;
-	width: 200px;
-	border-radius: 10px;
-	overflow: hidden;
-	max-height: 0;
-	opacity: 0;
-	transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-	transform-origin: top;
-	box-shadow: 1px 1px  7px rgba(0, 0, 0,0.2);
+    position: absolute;
+    right: 70px;
+    bottom: 30px;
+    width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transform-origin: top;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
 }
 .menuSetting.active {
-max-height: 300px;
-opacity: 1;
+    max-height: 300px;
+    opacity: 1;
 }
 
 .dark-mode {
-  .header,
-  .Menu_slideBar,
-  .content-container,
-  .ant-layout-footer,
-  .wrapper,
-  .custom-sidebar{
-    background-color: #121212 !important;
-    color: #b0b0b0 !important;
-  }
-  .toggleMenu{
-    background-color: #222222 !important;
-  }
-  .pageTitle,
-  .ant-btn-icon svg{
-    color: #a9a9a9 !important;
-  }
-  .icon_admin,
-  .breadcrumb_header,
-  .icon_noti,
-  .ant-radio-group span,
-  .ant-breadcrumb-separator,
-  .logo h2{
-    color: #b0b0b0 !important;
-  }
-  .ant-table{
-	margin-top: 10px;
-  }
-  .ant-table,
-  .info-account{
-    color: #b0b0b0 !important;
-    background: #222222 !important;
-  }
-  .ant-layout{
-    background: #222222 !important;
-  }
-  .pageTitle {
-    margin-bottom: 0 !important;
-  }
-  .ant-menu,
-  .item_user,
-  .item_dasbroad,
-  .item_noti,
-  .view-container{
-	background-color:#f5f6fa;
-	color: #b0b0b0 ;
-  }
-  .account-header p,
-  .icon_admin,
-  .icon_noti,
-  .active-breadcrumb a{
-	color: #fff !important;
-  }
-  
+    .header,
+    .Menu_slideBar,
+    .content-container,
+    .ant-layout-footer,
+    .wrapper,
+    .custom-sidebar {
+        background-color: #121212 !important;
+        color: #b0b0b0 !important;
+    }
+    .toggleMenu {
+        background-color: #222222 !important;
+    }
+    .pageTitle,
+    .ant-btn-icon svg {
+        color: #a9a9a9 !important;
+    }
+    .avata_header,
+    .breadcrumb_header,
+    .icon_noti,
+    .ant-radio-group span,
+    .ant-breadcrumb-separator,
+    .logo h2 {
+        color: #b0b0b0 !important;
+    }
+    .ant-table {
+        margin-top: 10px;
+    }
+    .ant-table,
+    .info-account {
+        color: #b0b0b0 !important;
+        background: #222222 !important;
+    }
+    .ant-layout {
+        background: #222222 !important;
+    }
+    .pageTitle {
+        margin-bottom: 0 !important;
+    }
+    .ant-menu,
+    .item_user,
+    .item_dasbroad,
+    .item_noti,
+    .view-container {
+        background-color: #f5f6fa;
+        color: #b0b0b0;
+    }
+    .account-header p,
+    .avata_header,
+    .icon_noti,
+    .active-breadcrumb {
+        color: #fff !important;
+    }
 }
 
 .ant-layout-sider-children ul {
-	border-inline-end: none !important;
+    border-inline-end: none !important;
 }
-.ant-menu{
-	border-inline-end:none !important;
+.ant-menu {
+    border-inline-end: none !important;
 }
-.ant-upload-list-item-actions{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.ant-upload-list-item-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.active-breadcrumb a{
-	color: #000 !important;
+.active-breadcrumb a {
+    color: #000 !important;
 }
 .custom-sidebar {
-	transition: width 0.2s;
+    transition: width 0.2s;
 }
 .logo-text {
-	font-size: 25px;
-	font-weight: 600;
-	opacity: 1;
-	transition: opacity 0.1s; 
+    font-size: 25px;
+    font-weight: 600;
+    opacity: 1;
+    transition: opacity 0.1s;
 }
-  
+
 .hidden {
-	opacity: 0;
+    opacity: 0;
 }
-  
+.header-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+}
+.avata_header {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-size: cover;
+}
+.ant-modal-confirm-btns {
+    display: flex !important;
+    justify-content: right !important;
+}

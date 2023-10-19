@@ -12,6 +12,7 @@ import { logout, toggleLogout } from "../../modules/auth/slices";
 import BreadcrumbComponent from "../components/Breadcrumb";
 import { ADMIN_SLIDER } from "../../constants/roleLink";
 import { Header } from "antd/es/layout/layout";
+import avataImage from '../../assets/images/avata.png'
 interface HeaderComponentProps {
 	collapsed: boolean;
 	toggleMenu: () => void;
@@ -46,11 +47,18 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 
 	const menu = (
 		<Menu>
+      <div className="header-account">
+        <img style={{width:'50px',height:'50px',borderRadius:'50%',marginRight:'10px'}} src={avataImage} alt=""/>
+        <div>
+          <p>cong</p>
+          <span style={{color:'#ccc',fontWeight:'600'}}>cong@gmail.com</span>
+        </div>
+      </div>
 			<Menu.Item key="1" icon={<UserOutlined />}>
 				<a href="/myAccount">Account</a>
 			</Menu.Item>
-			<Menu.Item key="2" icon={<LogoutOutlined />}>
-				<p onClick={showConfirmLogout}>Logout</p>
+			<Menu.Item style={{marginBottom:'5px'}} key="2" icon={<LogoutOutlined />}>
+				<p  onClick={showConfirmLogout}>Logout</p>
 			</Menu.Item>
 		</Menu>
 	);
@@ -62,7 +70,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 					<Col md={16}>
 						<BreadcrumbComponent adminSlider={ADMIN_SLIDER} />
 					</Col>
-					<Col md={4}>
+					<Col xs={12} sm={3} md={3.5}>
 						<Badge count={30}>
 							<a
 								className="icon_noti"
@@ -77,10 +85,10 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 					<Col sm={12} md={4}>
 						<Dropdown overlay={menu} trigger={["click"]} className="dropdown">
 							<div className="account-header">
-								<Avatar
-									className="icon_admin"
-									size="default"
-									icon={<UserOutlined />}
+								<img 
+                  src={avataImage}
+                  alt=""
+									className="avata_header"
 									onClick={handleAvatarClick}
 								/>
 								<p

@@ -13,8 +13,8 @@ export const ADMIN_SLIDER = [
 	{
 		key: "2",
 		icon: <UsergroupAddOutlined />,
-		link: "/listUser",
-		title: "user_list",
+		link: "/manage_user",
+		title: "manage_user",
 		subMenu: [
 			{
 				key: "3",
