@@ -24,6 +24,7 @@ const Role: React.FC = () => {
   const [pageSize, setPageSize] = useState(10);
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [openModalDel, setOpenModalDel] = useState(false)
+  const [roleSelected, setRoleSelected] = useState<any>()
 
   const data : RoleRecord[] = [
     {
@@ -74,17 +75,21 @@ const Role: React.FC = () => {
 
   const handleAddRole = () =>{
     setIsModalVisible(true)
+    setRoleSelected(null)
   }
   
   const handelCancelCreateRole = () => {
     form.resetFields()
     setIsModalVisible(false)
+    setRoleSelected(null)
   }
   const handleSubmit = ()=>{}
-  
+
   const onSearch = () => {
     console.log('ok')
   }
+
+  
 
 	return(
 		<div className="wapper_role">

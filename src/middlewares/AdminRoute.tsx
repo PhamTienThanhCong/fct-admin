@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../app/hooks';
+import { useAppSelector } from '../config/hooks';
 import useLoadData from '../hooks/useLoadData';
 import CustomLoading from '../controllers/common/loading/CustomLoading';
 

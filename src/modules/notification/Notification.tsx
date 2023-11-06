@@ -101,9 +101,12 @@ const Notification: React.FC = () => {
     {
       title: t('content'),
       dataIndex: 'content',
+      width: 250,
     },
     {
       title: t('action'),
+      className: 'action-column',
+      width: 200,
       dataIndex: 'action',
       render: (text: string, record: UserRecord) => (
         <div className="action-buttons-container">

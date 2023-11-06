@@ -1,5 +1,6 @@
 import { BellOutlined, UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { DashboardTwoTone } from "@ant-design/icons";
+import { FaStore  } from 'react-icons/fa';
 
 export const ADMIN_SLIDER = [
 	{
@@ -29,14 +30,32 @@ export const ADMIN_SLIDER = [
 		],
 	},
 	{
-		key: "4",
+		key: "5",
+		icon: <FaStore  />,
+		link: "/manage_supplier",
+		title: "manage_supplier",
+		subMenu: [
+			{
+				key: "6",
+				link: "/rescue_service",
+				title: "rescue_service",
+			},
+			{
+				key: "7",
+				link: "/car_type",
+				title: "car_type",
+			}
+		],
+	},
+	{
+		key: "8",
 		icon: <BellOutlined />,
 		link: "/notification",
 		title: "notification",
 		subMenu: undefined,
 	},
 	{
-		key: "5",
+		key: "9",
 		icon: <UserOutlined />,
 		link: "/myAccount",
 		title: "account",

@@ -18,7 +18,7 @@ interface UserRecord {
   address: string;
 }
 
-const UserContainer: React.FC = () => {
+const Cartype: React.FC = () => {
   const { t } = useTranslation('translation')
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [openModalDel, setOpenModalDel] = useState(false)
@@ -63,110 +63,27 @@ const UserContainer: React.FC = () => {
       name: 'Edward King 4',
       age: 33,
       address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '4',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '20',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
-    {
-      key: '20',
-      name: 'Edward King 4',
-      age: 33,
-      address: 'London, Park Lane no. 4',
-    },
+    }
   ];
 
   const columns = [
     {
-      title: 'Name',
+      title: t('name_car_type'),
       dataIndex: 'name',
-      width: 300,
+      width: 250,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      width: 300,
+      title: t('country'),
+      dataIndex: 'country',
+      width: 250,
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: t('description'),
+      dataIndex: 'description',
+      width: 450,
     },
     {
-      title: 'Action',
+      title: t('action'),
       className: 'action-column',
       dataIndex: 'action',
       render: (text: string, record: UserRecord) => ( 
@@ -215,12 +132,12 @@ const UserContainer: React.FC = () => {
     <div className='wrapper_user'>
       <div className='item_user'>
         <div className='header_table_user'>
-          <PageTitle title={t('list_user')}/>
+          <PageTitle title={t('list_car_type')}/>
           <div style={{marginBottom:'10px'}}>
             <CustomButton
               style={{ textAlign: 'center' }}
               type='primary'
-              item={t("add_user")}
+              item={t("add_car_type")}
               icon={<IoMdAdd fontSize={16} />}
               onClick={handleAddUser}
             />
@@ -257,7 +174,7 @@ const UserContainer: React.FC = () => {
       <div>
         <ModalComponent
           visible={isModalVisible}
-          title={t("add_user")}
+          title={t("add_car_type")}
           onOk={() => form.submit()}
           width='48rem'
           onCancel={handelCancelCreateUser}
@@ -275,16 +192,16 @@ const UserContainer: React.FC = () => {
               <Col span={12}>
                 <Form.Item
                   name="username"
-                  label={t('name')}
+                  label={t('name_car_type')}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
-                      message: `${t('rule_user')}${t('not_empty')}`
+                      message: `${t('name_car_type')}${t('not_empty')}`
                     },
                     {
                       max: 50,
-                      message: `${t('rule_user')}${t('name_too_long')}`
+                      message: `${t('name_car_type')}${t('name_too_long')}`
                     }
                   ]}
                 >
@@ -293,17 +210,17 @@ const UserContainer: React.FC = () => {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  name="age"
-                  label={t('age')}
+                  name="country"
+                  label={t('country')}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
-                      message: `${t('rule_user')}${t('not_empty')}`
+                      message: `${t('country')}${t('not_empty')}`
                     },
                     {
-                      max: 3,
-                      message: `${t('rule_user')}${t('name_too_long')}`
+                      max: 50,
+                      message: `${t('country')}${t('name_too_long')}`
                     }
                   ]}
                 >
@@ -312,31 +229,21 @@ const UserContainer: React.FC = () => {
               </Col>
               <Col span={12}>
               <Form.Item
-                name='password'
-                label={t('password')}
+                name='description'
+                label={t('description')}
                 rules={[
                   {
                     required: true,
                     whitespace: true,
-                    message: `${t('password')}${t('not_empty')}`
+                    message: `${t('description')}${t('not_empty')}`
                   },
                   {
-                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    message:t('not_empty')
+                    max: 200,
+                    message: `${t('description')}${t('name_too_long')}`
                   }
                 ]}
               >
                 <Input.Password />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name='mobile' label={t('phone_number')}>
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name='address' label={t('address')}>
-                <Input />
               </Form.Item>
             </Col>
             </Row>
@@ -358,4 +265,4 @@ const UserContainer: React.FC = () => {
   );
 }
 
-export default UserContainer;
+export default Cartype;

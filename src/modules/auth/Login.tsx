@@ -4,7 +4,7 @@ import { BiLogIn } from "react-icons/bi";
 import BgLoginImage from "../../assets/images/BgLoginImage.png";
 import "./login.scss";
 import { showAlert } from "../../utils/showAlert";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../config/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo } from "react";
 import { DEFAULT_USER_LOGIN } from "../../constants/user";

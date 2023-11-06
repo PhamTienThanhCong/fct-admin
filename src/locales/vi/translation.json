@@ -50,5 +50,15 @@
     "manage_user" : "Quản lý người dùng",
     "add_role" : "Thêm vai trò",
     "code" : " Mã vai trò",
+    "manage_supplier" : "Quản lý đơn vị cung cấp",
+    "rescue_service" : "Dịch vụ cứu hộ",
+    "car_type" : "Hãng xe",
+    "add_unit_service" : "Thêm đơn vị dịch vụ",
+    "add_car_type" : "Thêm hãng xe",
+    "list_car_type" : "Danh sách hãng xe",
+    "country" : "Quốc gia",
+    "description" : "Mô tả",
+    "name_car_type": "Tên hãng xe",
+    "unit_name" : "Tên đơn vị",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

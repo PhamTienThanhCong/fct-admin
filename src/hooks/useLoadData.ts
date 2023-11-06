@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../config/hooks';
 import { getDataUser } from '../modules/auth/api';
 
 // get Data User

@@ -8,9 +8,10 @@ import UserContainer from "./modules/users/UserContainer";
 import './assets/App.css'
 import DashBroad from "./modules/dashBroad/DashBroad";
 import Notification from "./modules/notification/Notification";
-import Profile from "./modules/account/MyAccount";
 import Role from "./modules/role/Role";
 import MyAccount from "./modules/account/MyAccount";
+import VehicleManage from "./modules/vehicleManage/VehicleManage";
+import CarType from "./modules/carType/CarType";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
               <Route path="/notification" element={<Notification/>} />
               <Route path="/myAccount" element={<MyAccount/>} />
               <Route path="/listUser/role" element={<Role/>} />
+              <Route path="/rescue_service" element={<VehicleManage/>} />
+              <Route path="/car_type" element={<CarType/>} />
             </Route>
           </Route>
         </Routes>

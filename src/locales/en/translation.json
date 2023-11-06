@@ -48,5 +48,15 @@
     "add_role" : "Add role",
     "manage_user" : "Manage user",
     "code" : "Code",
+    "manage_supplier" : "Manage supplier",
+    "rescue_service" : "Rescue service",
+    "car_type" : "Car type",
+    "add_unit_service" : "Add unit service",
+    "add_car_type" : "Add car type",
+    "list_car_type" : "List car type",
+    "country" : "Country",
+    "description" : "Description",
+    "name_car_type" : "Car type name",
+    "unit_name" : "Unit name",
     "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
 }
