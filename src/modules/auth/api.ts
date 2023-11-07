@@ -4,7 +4,7 @@ import { sendRequest } from '../../utils/sendRequest';
 
 export const loginRequest = createAsyncThunk<any, UserLogin>("auth/login", async (payload, thunkApi) => {
     const res = await sendRequest('/user/login', {
-        payload: {user: payload},
+        payload: payload,
         thunkApi,
         method: "POST",
     });

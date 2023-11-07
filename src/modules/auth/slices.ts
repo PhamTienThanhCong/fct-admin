@@ -40,9 +40,7 @@ const authSlice = createSlice({
     builder.addCase(loginRequest.fulfilled, (state, action: PayloadAction<any>) => {
         state.isAuthenticated = true;
         state.isFetching = false;
-        state.currentUser = action.payload.user;
-        // save token to localStorage
-        localStorage.setItem("token", action.payload.user.token);
+        localStorage.setItem("token", action.payload.token);
     });
     builder.addCase(loginRequest.pending, (state) => {
         state.isFetching = true;
