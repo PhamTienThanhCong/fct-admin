@@ -3,8 +3,8 @@ import { UserLogin } from '../../types/users';
 import { sendRequest } from '../../utils/sendRequest';
 
 export const loginRequest = createAsyncThunk<any, UserLogin>("auth/login", async (payload, thunkApi) => {
-    const res = await sendRequest('/users/login', {
-        payload: {user: payload},
+    const res = await sendRequest('/user/login', {
+        payload: payload,
         thunkApi,
         method: "POST",
     });
@@ -12,7 +12,7 @@ export const loginRequest = createAsyncThunk<any, UserLogin>("auth/login", async
 });
 
 export const getDataUser = createAsyncThunk<any, void>("auth/getDataUser", async (payload, thunkApi) => {
-    const res = await sendRequest('/user', {
+    const res = await sendRequest('/user/get_user', {
         thunkApi,
         method: "GET",
     });

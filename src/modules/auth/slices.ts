@@ -2,15 +2,22 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AuthState } from "../../types/users";
 import { getDataUser, loginRequest } from "./api";
 
+const CURRENT_USER = {
+  id: 0,
+  email: "",
+  full_name: "",
+  role_id: null,
+  phone: "",
+  address: "",
+  card_id: "",
+  title: "",
+  description: "",
+}
+
 const initialState: AuthState = {
     isAuthenticated: false,
     isFetching: true,
-    currentUser: {
-      id: 0,
-      email: "",
-      username: "",
-      role: null,
-    },
+    currentUser: CURRENT_USER,
   };
 
 const authSlice = createSlice({
@@ -19,12 +26,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.isAuthenticated = false;
-      state.currentUser = {
-        id: 0,
-        email: "",
-        username: "",
-        role: null,
-      };
+      state.currentUser = CURRENT_USER;
       // remove token from localStorage
       localStorage.removeItem("token");
       localStorage.removeItem("token");
@@ -38,9 +40,7 @@ const authSlice = createSlice({
     builder.addCase(loginRequest.fulfilled, (state, action: PayloadAction<any>) => {
         state.isAuthenticated = true;
         state.isFetching = false;
-        state.currentUser = action.payload.user;
-        // save token to localStorage
-        localStorage.setItem("token", action.payload.user.token);
+        localStorage.setItem("token", action.payload.token);
     });
     builder.addCase(loginRequest.pending, (state) => {
         state.isFetching = true;
