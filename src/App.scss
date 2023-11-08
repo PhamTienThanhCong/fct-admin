@@ -44,7 +44,7 @@
     position: absolute;
     right: 20px;
 }
-.ant-breadcrumb  {
+.ant-breadcrumb {
     font-weight: 600;
     font-size: 16px;
 }
@@ -185,4 +185,37 @@
 .ant-modal-confirm-btns {
     display: flex !important;
     justify-content: right !important;
+}
+
+.whistle {
+    width: 20%;
+    fill: #f95959;
+    margin: 90px 40%;
+    text-align: left;
+    transform: translate(-50%, -50%);
+    transform: rotate(0);
+    transform-origin: 80% 30%;
+    animation: wiggle 0.2s infinite;
+    filter: invert(18%) sepia(150%) saturate(3000%) hue-rotate(1deg) brightness(70%) contrast(98%);
+}
+
+.forbidden-status {
+    margin-top: -100px;
+    margin-bottom: 20px;
+    color: #facf5a;
+    font-size: 90px;
+    font-weight: 800;
+}
+.forbidden-text {
+    color: #455d7a;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.back-login {
+    border-bottom: 1px dashed #837256;
+    font-style: italic;
+    text-decoration: none;
+    color: #837256;
+    cursor: pointer;
+    font-size: 24px;
 }

@@ -1,6 +1,11 @@
 import { BellOutlined, UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { DashboardTwoTone } from "@ant-design/icons";
 import { FaStore  } from 'react-icons/fa';
+import AccessForbidden from "../../modules/auth/AccessForbidden";
+
+const injectProps = (props :any, Component :any) => {
+  return <Component {...props} />
+}
 
 export const ADMIN_SLIDER = [
 	{

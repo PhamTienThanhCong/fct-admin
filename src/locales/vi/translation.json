@@ -60,5 +60,9 @@
     "description" : "Mô tả",
     "name_car_type": "Tên hãng xe",
     "unit_name" : "Tên đơn vị",
+    "back_login" : "Vui lòng quay lại trang đăng nhập",
+    "access_forbidden": "Cấm truy cập!",
+    "exception_api": "Một lỗi không mong muốn đã xảy ra.",
+    "edit_carType_success": "Cập nhật kiểu xe thành công",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

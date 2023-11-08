@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "../users/UserContainer.scss";
 import CustomButton from "../../controllers/common/custombutton/CustomButton";
@@ -9,62 +9,31 @@ import { Col, Form, Input, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import PageTitle from "../../layouts/components/Pagetitle";
 import DynamicList from "../../controllers/common/customList/DynamicList";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../config/store";
+import { getSescueServiceAsync } from "./slices";
 
 const { Search } = Input;
 interface UserRecord {
-	key: React.Key;
-	name: string;
-	age: number;
-	address: string;
+  name: string,
+  phone: string,
+  address: string,
+  email: string,
+  local_x: 0,
+  local_y: 0,
+  id: 0
 }
 
 const VehicleManage: React.FC = () => {
+  const { listSescue , keyword } = useSelector((state: RootState) => state.vehicle);
 	const { t } = useTranslation("translation");
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [openModalDel, setOpenModalDel] = useState(false);
 	const [form] = Form.useForm();
-	const [pageNumber, setPageNumber] = useState(0);
-	const [pageSize, setPageSize] = useState(10);
+  const [pageNumber, setPageNumber] = useState<number>(0)
+  const [pageSize, setPageSize] = useState<number>(10)
 	const [isSearch, setIsSearch] = useState(false);
-
-	const data: UserRecord[] = [
-		{
-			key: "1",
-			name: "Edward King 1",
-			age: 32,
-			address: "London, Park Lane no. 1",
-		},
-		{
-			key: "2",
-			name: "Edward King 2",
-			age: 33,
-			address: "London, Park Lane no. 2",
-		},
-		{
-			key: "3",
-			name: "Edward King 3",
-			age: 33,
-			address: "London, Park Lane no. 3",
-		},
-		{
-			key: "4",
-			name: "Edward King 4",
-			age: 33,
-			address: "London, Park Lane no. 4",
-		},
-		{
-			key: "4",
-			name: "Edward King 4",
-			age: 33,
-			address: "London, Park Lane no. 4",
-		},
-		{
-			key: "4",
-			name: "Edward King 4",
-			age: 33,
-			address: "London, Park Lane no. 4",
-		},
-	];
+  const dispatch = useDispatch<any>()
 
 	const columns = [
 		{
@@ -115,6 +84,16 @@ const VehicleManage: React.FC = () => {
 			),
 		},
 	];
+
+  useEffect(()=>{
+    if(!isSearch){
+      const params = {
+        page: pageNumber,
+        size: pageSize
+      }
+      dispatch(getSescueServiceAsync(params))
+    }
+  },[dispatch,pageNumber,pageSize,isSearch])
 
 	const handleSubmit = () => {
 		console.log("submit");
@@ -174,11 +153,11 @@ const VehicleManage: React.FC = () => {
 				</div>
 				<DynamicList
 					keyId="key"
-					listData={data}
+					listData={listSescue?.data}
 					listColumn={columns}
 					pageNumber={pageNumber}
 					pageSize={pageSize}
-					totalCount={data.length}
+					totalCount={listSescue?.total_account}
 					onPageChange={(pageNumber, pageSize) => {
 						setPageNumber(pageNumber);
 						setPageSize(pageSize);

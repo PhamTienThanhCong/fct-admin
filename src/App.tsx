@@ -12,6 +12,7 @@ import Role from "./modules/role/Role";
 import MyAccount from "./modules/account/MyAccount";
 import VehicleManage from "./modules/vehicleManage/VehicleManage";
 import CarType from "./modules/carType/CarType";
+import AccessForbidden from "./modules/auth/AccessForbidden";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/car_type" element={<CarType/>} />
             </Route>
           </Route>
+          <Route path="/access-forbidden" element={<AccessForbidden/>}/>
         </Routes>
       </BrowserRouter>
     </>

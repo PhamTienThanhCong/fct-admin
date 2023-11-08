@@ -1,4 +1,4 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../modules/auth/slices';
 import carTypeReducer from '../modules/carType/slices'
 import vehicleReducer from '../modules/vehicleManage/slices'
@@ -8,14 +8,14 @@ export const store = configureStore({
       auth: authReducer,
       carType: carTypeReducer, 
       vehicle : vehicleReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+
+export default store

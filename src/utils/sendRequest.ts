@@ -7,6 +7,11 @@ interface RequestOptions {
     method: Method;
 }
 
+
+export const isSuccessApi = (status:any) => {
+    if (status === 200 || status === 201) return true
+}  
+
 export const sendRequest = async (url: string, options?: Partial<RequestOptions>) => {
     axios.defaults.baseURL = process.env.REACT_APP_API_URL;
     
