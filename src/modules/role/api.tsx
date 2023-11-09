@@ -28,3 +28,11 @@ export const updateRole = createAsyncThunk<RolePayload, RolePayload>("role/updat
     });
     return res;
 });
+
+export const deleteRole = createAsyncThunk<RolePayload, RolePayload>("role/deleteRole", async (payload, thunkApi) => {
+    const res = await sendRequest(`/role/${payload.id}`, {
+        thunkApi,
+        method: "DELETE",
+    });
+    return res;
+});

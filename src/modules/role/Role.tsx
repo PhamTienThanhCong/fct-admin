@@ -12,7 +12,9 @@ import { PiWarningFill } from "react-icons/pi";
 import Search from "antd/es/input/Search";
 import { RolePayload } from "../../types/roles";
 import { useAppDispatch, useAppSelector } from "../../config/hooks";
-import { getRole } from "./api";
+import { createRole, deleteRole, getRole, updateRole } from "./api";
+import { setLoadingStatus } from "../global/slices";
+import { removeRole } from "./slices";
 
 const Role: React.FC = () => {
     const { t } = useTranslation("translation");
@@ -25,12 +27,13 @@ const Role: React.FC = () => {
     const [pageNumber, setPageNumber] = useState(0);
     const [pageSize, setPageSize] = useState(10);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [openModalDel, setOpenModalDel] = useState(false);
-    const [roleSelected, setRoleSelected] = useState<any>();
 
     useEffect(() => {
         if (!isFetching){
             dispatch(getRole({}));
+            dispatch(setLoadingStatus(false))
+        }else{
+            dispatch(setLoadingStatus(true))
         }
     }, [dispatch, isFetching]);
 
@@ -56,24 +59,53 @@ const Role: React.FC = () => {
             dataIndex: "action",
             render: (text: string, record: RolePayload) => (
                 <div className="action-buttons-container">
-                    <EditOutlined className="icon-action-edit" />
-                    <DeleteOutlined className="icon-action-delete" />
+                    <EditOutlined 
+                        className="icon-action-edit"
+                        onClick={() => editRow(record)}
+                    />
+                    <DeleteOutlined className="icon-action-delete"
+                        onClick={() => deleteRow(record)}
+                    />
                 </div>
             ),
         },
     ];
 
+    const editRow = async (record: RolePayload) => {
+        await setIsModalVisible(true);
+        form.setFieldsValue(record);
+    }
+
+    const deleteRow = async (record: RolePayload) => {
+        if (window.confirm("Are you sure you want to delete this role?")) {
+            dispatch(setLoadingStatus(true))
+            let res = await dispatch(deleteRole(record));
+            if (res.payload){
+                dispatch(removeRole(record))
+            }
+            dispatch(setLoadingStatus(false))
+        }
+    }
+
     const handleAddRole = () => {
         setIsModalVisible(true);
-        setRoleSelected(null);
     };
 
     const handelCancelCreateRole = () => {
         form.resetFields();
         setIsModalVisible(false);
-        setRoleSelected(null);
     };
-    const handleSubmit = () => {};
+    const handleSubmit = async() => {
+        dispatch(setLoadingStatus(true))
+        if (form.getFieldValue("id")) {
+            await dispatch(updateRole({...form.getFieldsValue(), id: form.getFieldValue("id")}));
+        }else{
+            await dispatch(createRole(form.getFieldsValue()));
+        }
+        dispatch(setLoadingStatus(false))
+        setIsModalVisible(false);
+        form.resetFields();
+    };
 
     const onSearch = () => {
         console.log("ok");
@@ -101,7 +133,7 @@ const Role: React.FC = () => {
                     />
                 </div>
                 <DynamicList
-                    keyId="key"
+                    keyId="id"
                     listData={roles}
                     listColumn={columns}
                     pageNumber={pageNumber}
@@ -116,28 +148,9 @@ const Role: React.FC = () => {
                     <ModalComponent title={t("add_role")} visible={isModalVisible} onOk={() => form.submit()} onCancel={handelCancelCreateRole} okText={t("save")}>
                         <Form form={form} name="validateOnly" onFinish={handleSubmit} layout="vertical" autoComplete="off" className="form-add-role">
                             <Row gutter={24}>
-                                <Col span={12}>
+                                <Col span={24}>
                                     <Form.Item
-                                        name="username"
-                                        label={t("name")}
-                                        rules={[
-                                            {
-                                                required: true,
-                                                whitespace: true,
-                                                message: `${t("rule_user")}${t("not_empty")}`,
-                                            },
-                                            {
-                                                max: 50,
-                                                message: `${t("rule_user")}${t("name_too_long")}`,
-                                            },
-                                        ]}
-                                    >
-                                        <Input />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={12}>
-                                    <Form.Item
-                                        name="role"
+                                        name="name"
                                         label={t("role")}
                                         rules={[
                                             {
@@ -156,23 +169,24 @@ const Role: React.FC = () => {
                                 </Col>
                             </Row>
                             <Row gutter={24}>
-                                <Col span={12}>
+                                {/* textarea */}
+                                <Col span={24}>
                                     <Form.Item
-                                        name="code"
-                                        label={t("code")}
+                                        name="description"
+                                        label={t("description")}
                                         rules={[
                                             {
                                                 required: true,
                                                 whitespace: true,
-                                                message: `${t("code")}${t("not_empty")}`,
+                                                message: `${t("description")}${t("not_empty")}`,
                                             },
                                             {
-                                                max: 50,
-                                                message: `${t("code")}${t("name_too_long")}`,
+                                                max: 500,
+                                                message: `${t("description")}${t("name_too_long")}`,
                                             },
                                         ]}
                                     >
-                                        <Input />
+                                        <Input.TextArea />
                                     </Form.Item>
                                 </Col>
                             </Row>
