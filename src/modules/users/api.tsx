@@ -29,8 +29,8 @@ export const updateUser = createAsyncThunk<IUser, UserPayload>("user/updateUser"
     return res;
 });
 
-export const deleteUser = createAsyncThunk<IUser, UserPayload>("user/deleteUser", async (payload, thunkApi) => {
-    const res = await sendRequest(`/user/${payload.id}`, {
+export const deleteUser = createAsyncThunk<any, any>("user/deleteUser", async (payload, thunkApi) => {
+    const res = await sendRequest(`/user/${payload}`, {
         thunkApi,
         method: "DELETE",
     });

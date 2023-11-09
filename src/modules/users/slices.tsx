@@ -10,7 +10,11 @@ const initialState: UserSliceState = {
 export const UserSlice = createSlice({
     name: "role",
     initialState,
-    reducers: {},
+    reducers: {
+        _deleteUser: (state, action) => {
+            state.users = state.users.filter((User) => User.id !== action.payload);
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.isFetching = true;
@@ -31,4 +35,5 @@ export const UserSlice = createSlice({
     },
 });
 
+export const { _deleteUser } = UserSlice.actions;
 export default UserSlice.reducer;

@@ -11,9 +11,11 @@ import PageTitle from "../../layouts/components/Pagetitle";
 import DynamicList from "../../controllers/common/customList/DynamicList";
 import { useAppDispatch, useAppSelector } from "../../config/hooks";
 import { IUser } from "../../types/users";
-import { createUser, getUser } from "./api";
+import { createUser, deleteUser, getUser } from "./api";
 import { setLoadingStatus } from "../global/slices";
 import { getRole } from "../role/api";
+import { OBJECT_INPUT } from "../../constants/user";
+import { _deleteUser } from "./slices";
 
 const { Search } = Input;
 
@@ -21,6 +23,13 @@ const UserContainer: React.FC = () => {
   const { Option } = Select;
   const { t } = useTranslation("translation");
   const dispatch = useAppDispatch();
+
+  const rule_required = (name_lable: string) => {
+    return {
+      required: true,
+      message: `${name_lable} cannot be empty`,
+    };
+  };
 
   const users = useAppSelector((state) => state.user.users);
   const isFetching = useAppSelector((state) => state.user.isFetching);
@@ -35,7 +44,7 @@ const UserContainer: React.FC = () => {
   const [pageSize, setPageSize] = useState(10);
   const [isSearch, setIsSearch] = useState(false);
 
-  const userSelectedRef = React.useRef<IUser | null>(null);
+  const userSelectedRef = React.useRef<number>(0);
 
   useEffect(() => {
     if (!isFetching) {
@@ -124,7 +133,7 @@ const UserContainer: React.FC = () => {
 
   const handleOpenDeleteUser = (record: IUser) => {
     setOpenModalDel(true);
-    userSelectedRef.current = record;
+    userSelectedRef.current = record.id;
   };
 
   const handelCancelCreateUser = () => {
@@ -135,8 +144,13 @@ const UserContainer: React.FC = () => {
   const handleAddUser = () => {
     setIsModalVisible(true);
   };
-  const handleDeleteUser = () => {
-    // TODO call api delete
+  const handleDeleteUser = async () => {
+    if (userSelectedRef.current) {
+      dispatch(setLoadingStatus(true));
+      await dispatch(deleteUser(userSelectedRef.current));
+      dispatch(_deleteUser(userSelectedRef.current));
+      dispatch(setLoadingStatus(false));
+    }
     setOpenModalDel(false);
   };
   const onSearch = () => {
@@ -203,87 +217,24 @@ const UserContainer: React.FC = () => {
               className="form-add-edit"
             >
               <Row gutter={24}>
+                {OBJECT_INPUT.map((item) => (
+                  <Col span={12}>
+                    <Form.Item name={item.name} label={item.lable} rules={[rule_required(item.lable)]} >
+                      <Input placeholder={`Enter ${item.lable}`} />
+                    </Form.Item>
+                  </Col>
+                ))}
+                <Col span={12}>
+                    <Form.Item name={`password`} label={`Password`} rules={[rule_required("Password")]} >
+                      <Input.Password placeholder={`Enter Password`} />
+                    </Form.Item>
+                  </Col>
                 <Col span={12}>
                   <Form.Item
-                    name="email"
-                    label="Email"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Email cannot be empty",
-                      },
-                    ]}
+                    name="role_id"
+                    label="Role"
+                    rules={[rule_required("Role")]}
                   >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="full_name"
-                    label="Full Name"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Full Name cannot be empty",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="password"
-                    label="Password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Password cannot be empty",
-                      },
-                    ]}
-                  >
-                    <Input.Password />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="phone"
-                    label="Phone"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Phone cannot be empty",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="address" label="Address"
-                  rules={[
-                    {
-                        required: true,
-                        message: "Address cannot be empty",
-                    },
-                ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="card_id" label="Card ID">
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="title" label="Title">
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  {/* form select */}
-                  <Form.Item name="role_id" label="Role">
                     <Select placeholder="Select a role">
                       {roles.map((role) => (
                         <Option key={role.id} value={role.id}>
@@ -297,17 +248,7 @@ const UserContainer: React.FC = () => {
                   <Form.Item
                     name="description"
                     label={t("description")}
-                    rules={[
-                      {
-                        required: true,
-                        whitespace: true,
-                        message: `${t("description")}${t("not_empty")}`,
-                      },
-                      {
-                        max: 500,
-                        message: `${t("description")}${t("name_too_long")}`,
-                      },
-                    ]}
+                    rules={[rule_required("Role")]}
                   >
                     <Input.TextArea />
                   </Form.Item>
@@ -319,8 +260,8 @@ const UserContainer: React.FC = () => {
             title={t("delete_user")}
             visible={openModalDel}
             icon={<PiWarningFill className="icon-warning mt-2" />}
-            onOk={() => form.submit()}
-            onCancel={handleDeleteUser}
+            onOk={() => handleDeleteUser()}
+            onCancel={() => setOpenModalDel(false)}
             okText={t("confirm")}
           >
             <p className="text-confirm text-lg text-center mb-10">
