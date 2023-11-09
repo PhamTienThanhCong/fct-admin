@@ -10,6 +10,18 @@ export interface IUser {
   description: string | null
 }
 
+export interface UserPayload {
+  id?: number;
+  role_id: string | null | number;
+  email: string | null;
+  full_name: string | null;
+  phone: string | null;
+  address: string | null;
+  card_id: string | null;
+  title: string | null;
+  description: string | null
+}
+
 export interface AuthState {
   isAuthenticated: boolean;
   isFetching: boolean;
@@ -19,4 +31,9 @@ export interface AuthState {
 export interface UserLogin {
   email: string;
   password: string;
+}
+
+export interface UserSliceState {
+  users: IUser[];
+  isFetching: boolean;
 }

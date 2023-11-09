@@ -8,7 +8,6 @@ import { IoMdAdd } from "react-icons/io";
 import DynamicList from "../../controllers/common/customList/DynamicList";
 import { useEffect, useState } from "react";
 import ModalComponent from "../../controllers/common/modal/BaseModal";
-import { PiWarningFill } from "react-icons/pi";
 import Search from "antd/es/input/Search";
 import { RolePayload } from "../../types/roles";
 import { useAppDispatch, useAppSelector } from "../../config/hooks";
