@@ -1,5 +1,5 @@
 import { Modal } from 'antd'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useLayoutEffect } from 'react'
 import { BsCheckLg } from 'react-icons/bs'
 import CustomButton from '../custombutton/CustomButton'
 import '../modal/BaseModal.scss'
@@ -13,18 +13,28 @@ interface ModalProps {
   onOk: () => void
   onCancel: () => void
   okText: string
+  hidenIconSubmit?: boolean
 }
 
-const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, width, onOk, onCancel, okText }) => {
+const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, width, onOk, onCancel, okText,hidenIconSubmit = false }) => {
   const theme = localStorage.getItem('themeLayout') === 'dark'
 
   const handleCancel = () => {
+    document.documentElement.classList.remove('lock-body-scroll')
     onCancel()
   }
 
   const handleOk = () => {
     onOk()
   }
+
+  useLayoutEffect(() => {
+    if (visible) {
+      document.documentElement.classList.add('lock-body-scroll')
+    } else {
+      document.documentElement.classList.remove('lock-body-scroll')
+    }
+  }, [visible])
 
   return (
     <Modal
@@ -46,7 +56,7 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, 
             className='button-cancel'
             htmlType='reset'
             size='large'
-            item='Hủy'
+            item={'hủy'}
             onClick={handleCancel}
           />
           <CustomButton
@@ -55,7 +65,7 @@ const ModalComponent: React.FC<ModalProps> = ({ visible, title, children, icon, 
             htmlType='submit'
             className='button-submit'
             item={okText}
-            icon={<BsCheckLg fontSize={16} />}
+            icon={hidenIconSubmit ? null : <BsCheckLg fontSize={16} />}
             onClick={handleOk}
           />
         </div>
