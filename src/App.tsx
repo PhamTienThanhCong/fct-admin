@@ -13,6 +13,7 @@ import MyAccount from "./modules/account/MyAccount";
 import VehicleManage from "./modules/vehicleManage/VehicleManage";
 import CarType from "./modules/carType/CarType";
 import AccessForbidden from "./modules/auth/AccessForbidden";
+import CustomerContainer from "./modules/customer/CustomerContainer";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/listUser/role" element={<Role/>} />
               <Route path="/rescue_service" element={<VehicleManage/>} />
               <Route path="/car_type" element={<CarType/>} />
+              <Route path="/listUser/customer" element={<CustomerContainer />} />
             </Route>
           </Route>
           <Route path="/access-forbidden" element={<AccessForbidden/>}/>

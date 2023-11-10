@@ -4,6 +4,7 @@ import carTypeReducer from '../modules/carType/slices'
 import vehicleReducer from '../modules/vehicleManage/slices'
 import roleReducer from '../modules/role/slices'
 import userReducer from '../modules/users/slices'
+import customerReducer from '../modules/customer/slices'
 
 export const store = configureStore({
     reducer:{
@@ -12,6 +13,7 @@ export const store = configureStore({
       vehicle : vehicleReducer,
       role: roleReducer,
       user: userReducer,
+      customer: customerReducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

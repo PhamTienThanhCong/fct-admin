@@ -48,7 +48,7 @@ const authSlice = createSlice({
     builder.addCase(getDataUser.fulfilled, (state, action: PayloadAction<any>) => {
         state.isAuthenticated = true;
         state.isFetching = false;
-        state.currentUser = action.payload.user;
+        state.currentUser = action.payload;
     });
     builder.addCase(getDataUser.rejected, (state) => {
         state.isFetching = false;

@@ -1,0 +1,37 @@
+@import '../../assets/_base.scss';
+.wrapper_user{
+  padding: 10px;
+}
+.item_user{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+.action-buttons-container {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+.action-button-delete,
+.action-button-edit{
+  text-align: center;
+}
+// .button-add-user{
+//   margin-bottom: 10px;
+// }
+.header_table_user{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-search{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.action-column{
+  text-align: center !important;
+}

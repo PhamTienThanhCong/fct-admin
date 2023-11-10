@@ -1,18 +1,20 @@
-import React from "react";
-import { Row, Col, Tooltip, Badge, Avatar, Dropdown, Menu } from "antd";
+import React, { useEffect } from "react";
+import { Row, Col, Tooltip, Badge, Dropdown, Menu } from "antd";
 import {
 	BellOutlined,
 	UserOutlined,
 	LogoutOutlined,
 	ExclamationCircleFilled,
 } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
 import { Modal } from "antd";
 import { logout, toggleLogout } from "../../modules/auth/slices";
 import BreadcrumbComponent from "../components/Breadcrumb";
 import { ADMIN_SLIDER } from "../../constants/roleLink";
 import { Header } from "antd/es/layout/layout";
 import avataImage from '../../assets/images/avata.png'
+import { useAppDispatch, useAppSelector } from "../../config/hooks";
+import { getRole } from "../../modules/role/api";
+import { setLoadingStatus } from "../../modules/global/slices";
 interface HeaderComponentProps {
 	collapsed: boolean;
 	toggleMenu: () => void;
@@ -22,8 +24,24 @@ interface HeaderComponentProps {
 }
 
 const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
-	const currentPath = props.location.pathname;
-	const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+
+    const {currentUser} = useAppSelector((state) => state.auth);
+    const roles = useAppSelector((state) => state.role.Roles);
+    const isFetchingRole = useAppSelector((state) => state.role.isFetching);
+
+    const RoleUser = roles.find((role) => role.id === currentUser.role_id);
+
+    useEffect(() => {
+        if (!isFetchingRole) {
+          dispatch(getRole({}));
+          dispatch(setLoadingStatus(false));
+        } else {
+          dispatch(setLoadingStatus(true));
+        }
+      }, [dispatch, isFetchingRole]);
+
+	
 
 	const handleAvatarClick = () => {
 		console.log("ok");
@@ -50,8 +68,10 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
       <div className="header-account">
         <img style={{width:'50px',height:'50px',borderRadius:'50%',marginRight:'10px'}} src={avataImage} alt=""/>
         <div>
-          <p>cong</p>
-          <span style={{color:'#ccc',fontWeight:'600'}}>cong@gmail.com</span>
+          <p>
+            {currentUser.full_name}
+          </p>
+          <span style={{color:'#ccc',fontWeight:'600'}}>{RoleUser?.name}</span>
         </div>
       </div>
 			<Menu.Item key="1" icon={<UserOutlined />}>
@@ -98,7 +118,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 										fontWeight: "600",
 										whiteSpace: "nowrap",
 									}}>
-									Vũ Thị miên
+									{currentUser?.full_name}
 								</p>
 							</div>
 						</Dropdown>
