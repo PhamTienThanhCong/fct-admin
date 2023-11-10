@@ -19,6 +19,7 @@
     "dark" : "dark",
     "light" : "light",
     "list_user" : "List User",
+    "list_customer": "List Customer",
     "add_user" : "Add User",
     "rule_user" : "Username or email address",
     "not_empty" : "Cannot be left blank",
