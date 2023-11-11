@@ -1,5 +1,6 @@
 import { BellOutlined, UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { DashboardTwoTone } from "@ant-design/icons";
+import { BsChatDots } from "react-icons/bs";
 import { FaStore  } from 'react-icons/fa';
 
 export const ADMIN_SLIDER = [
@@ -74,6 +75,24 @@ export const ADMIN_SLIDER = [
 	},
 	{
 		key: "12",
+		icon: <BsChatDots  />,
+		link: "/chatbot",
+		title: "chatbot",
+		subMenu: [
+			{
+				key: "13",
+				link: "/chatbot/list",
+				title: "list_chatbot",
+			},
+			{
+				key: "14",
+				link: "/chatbot/train",
+				title: "training_chatbot",
+			}
+		],
+	},
+	{
+		key: "15",
 		icon: <UserOutlined />,
 		link: "/myAccount",
 		title: "account",

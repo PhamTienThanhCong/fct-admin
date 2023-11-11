@@ -67,5 +67,8 @@
     "no" : "not",
     "manage_station" : "charging station manage",
     "list_station" : "List of charging stations",
-    "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
+    "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length",
+    "chatbot" : "Quản lý chatbot",
+    "list_chatbot" : "Danh sách chatbot",
+    "training_chatbot" : "Training chatbot"
 }
