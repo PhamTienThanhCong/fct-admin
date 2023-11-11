@@ -27,11 +27,11 @@ export const ADMIN_SLIDER = [
 				link: "/listUser/user",
 				title: "list_user",
 			},
-      {
-        key: "5",
-        link: "/list_customer",
-        title: "list_customer",
-      }
+			{
+				key: "5",
+				link: "/listUser/customer",
+				title: "list_customer",
+			}
 		],
 	},
 	{

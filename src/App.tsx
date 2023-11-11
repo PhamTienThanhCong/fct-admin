@@ -33,7 +33,6 @@ function App() {
               <Route path="/listUser/customer" element={<CustomerContainer />} />
               <Route path="/rescue_service" element={<VehicleManage/>} />
               <Route path="/car_type" element={<CarType/>} />
-              <Route path="/list_customer" element={<ListCustomer/>} />
               <Route path="/list_station" element={<ListStation/>} />
             </Route>
           </Route>
