@@ -1,9 +1,21 @@
+import { CustomerPayload } from '../../types/customer';
 import { UserLogin } from './../../types/users/index.d';
 
 export const DEFAULT_USER_LOGIN: UserLogin = {
     email: "",
     password: ""
 }
+
+export const OBJECT_INPUT_CUSTOMER = [
+    {
+        name: "phone",
+        lable: "Phone",
+    },
+    {
+        name: "full_name",
+        lable: "Full Name",
+    },
+]
 
 export const OBJECT_INPUT = [
     {
