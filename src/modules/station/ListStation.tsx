@@ -10,20 +10,29 @@ import PageTitle from '../../layouts/components/Pagetitle';
 import DynamicList from '../../controllers/common/customList/DynamicList';
 import { RootState } from '../../config/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCarTypeAsync, deleteCarTypeAsync, getListCarTypeAsync, toggleSetKeyword, updateCarTypeAsync } from './slices';
-import CarTypeForm from './CarTypeForm';
+// import CarTypeForm from './CarTypeForm';
 import { setLoadingStatus } from '../global/slices';
+import ListStationForm from './ListStationForm';
 
 const { Search } = Input;
 
 interface UserRecord {
-  id: string;
   name: string;
-  country: string;
   description: string;
+  address: string;
+  local_x: number;
+  local_y: number;
+  phone: string;
+  email: string;
+  image: string;
+  open_time: string; 
+  close_time: string; 
+  is_order: number;
+  id: number;
+  owner_id: number;
 }
 
-const CarType: React.FC = () => {
+const ListStation: React.FC = () => {
   const { listCarType, keyword } = useSelector((state: RootState) => state.carType);
   const { t } = useTranslation('translation');
   const dispatch = useDispatch<any>();
@@ -37,62 +46,57 @@ const CarType: React.FC = () => {
   const [userSelected, setUserSelected] = useState<UserRecord | null>(null);
 
   const handleSubmit = async (values: any) => {
-    
-    const params = {
-      name: values.name,
-      country: values.country,
-      description: values.description,
-    };
-    dispatch(setLoadingStatus(true))
-    if (userSelected) {
-      await dispatch(updateCarTypeAsync({ id: userSelected.id, params }))
-    } else {
-      await dispatch(createCarTypeAsync(params));   
-    }
-    onSearch(keyword)
     setIsModalVisible(false);
     form.resetFields();
   };
-
-  useEffect(() => {
-    if (!isSearch) {
-      const params = {
-        page: pageNumber + 1,
-        size: pageSize,
-      };
-      dispatch(getListCarTypeAsync(params));
-    }
-  }, [dispatch, pageNumber, pageSize, isSearch]);
-
   const columns = [
     {
-      title: t('name_car_type'),
+      title: "Tên",
       dataIndex: 'name',
-      width: 250,
+      width: 150,
     },
     {
-      title: t('country'),
-      dataIndex: 'country',
-      width: 250,
-    },
-    {
-      title: t('description'),
+      title: "Mô tả",
       dataIndex: 'description',
-      width: 450,
+      width: 200,
     },
     {
-      title: t('action'),
-      className: 'action-column',
+      title: "Địa chỉ",
+      dataIndex: 'address',
+      width: 150,
+    },
+    {
+      title: "Số điện thoại",
+      dataIndex: 'phone',
+      width: 150,
+    },
+    {
+      title: "Email",
+      dataIndex: 'email',
+      width: 150,
+    },
+    {
+      title: "Đơn hàng",
+      dataIndex: 'is_order',
+      render: (text: number) => (text ? 'Có' : 'Không'),
+      width: 150,
+    },
+    {
+      title: "ID Chủ cửa hàng",
+      dataIndex: 'owner_id',
+      width: 150,
+    },
+    {
+      title: "Hành động",
       dataIndex: 'action',
-      render: (text: string, record: UserRecord) => (
+      render: (text: string, record: any) => (
         <div className="action-buttons-container">
           <EditOutlined onClick={() => handleEditUser(record)} className="icon-action-edit" />
-          <DeleteOutlined onClick={() => handleOpenDeleteUser(record)} className="icon-action-delete" />n
+          <DeleteOutlined onClick={() => handleOpenDeleteUser(record)} className="icon-action-delete" />
         </div>
       ),
     },
   ];
-
   const handleEditUser = (record: UserRecord) => {
     setUserSelected(record);
     form.setFieldsValue(record);
@@ -115,30 +119,18 @@ const CarType: React.FC = () => {
   };
 
   const handleDeleteUser = async () => {
-    try {
-      if (userSelected) {
-        await dispatch(deleteCarTypeAsync(userSelected.id));
-        setOpenModalDel(false);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    console.log('ol')
   };
 
   const onSearch = (value: any) => {
-    dispatch(toggleSetKeyword(value));
-    const params = {
-      page: pageNumber + 1,
-      size: pageSize,
-    };
-    dispatch(getListCarTypeAsync(params));
+    console.log('ok')
   };
 
 return (
     <div className="wrapper_user">
       <div className="item_user">
         <div className="header_table_user">
-          <PageTitle title={t('list_car_type')} />
+          <PageTitle title={t('list_station')} />
           <div style={{ marginBottom: '10px' }}>
             <CustomButton
               style={{ textAlign: 'center' }}
@@ -195,7 +187,7 @@ return (
               <Form.Item name='id' style={{ display: 'none' }}>
                 <Input />
               </Form.Item>
-              <CarTypeForm userId={userSelected?.id || null} />
+              <ListStationForm userId={userSelected?.id || null} />
             </Form>
           </ModalComponent>
           <ModalComponent
@@ -216,4 +208,4 @@ return (
 
 };
 
-export default CarType;
+export default ListStation;

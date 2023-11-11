@@ -11,7 +11,9 @@ import PageTitle from "../../layouts/components/Pagetitle";
 import DynamicList from "../../controllers/common/customList/DynamicList";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../config/store";
-import { getSescueServiceAsync } from "./slices";
+import { createVehicleAsync, deleteVehicleAsync, getSescueServiceAsync, toggleSetKeyword, updateVehicleAsync } from "./slices";
+import VehicleManaForm from "./VehicleManaForm";
+import { setLoadingStatus } from "../global/slices";
 
 const { Search } = Input;
 interface UserRecord {
@@ -19,9 +21,9 @@ interface UserRecord {
   phone: string,
   address: string,
   email: string,
-  local_x: 0,
-  local_y: 0,
-  id: 0
+  local_x: number,
+  local_y: number,
+  id: number
 }
 
 const VehicleManage: React.FC = () => {
@@ -34,6 +36,7 @@ const VehicleManage: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10)
 	const [isSearch, setIsSearch] = useState(false);
   const dispatch = useDispatch<any>()
+  const [userSelected, setUserSelected] = useState<UserRecord | null>(null);
 
 	const columns = [
 		{
@@ -95,15 +98,36 @@ const VehicleManage: React.FC = () => {
     }
   },[dispatch,pageNumber,pageSize,isSearch])
 
-	const handleSubmit = () => {
-		console.log("submit");
+	const handleSubmit = async (values: UserRecord) => {
+    const params = {
+      name: values.name,
+      phone: values.phone,
+      address: values.address,
+      email: values.email,
+      local_x: values.local_x,
+      local_y: values.local_x,
+    }
+    dispatch(toggleSetKeyword(true))
+    if(userSelected){
+      await dispatch(updateVehicleAsync({ id: userSelected.id, params }))
+    }else{
+      await dispatch(createVehicleAsync( params))
+    }
+    onSearch(keyword)
+    setIsModalVisible(false);
+    form.resetFields();
 	};
+
 	const handleEditUser = (record: UserRecord) => {
-		setIsModalVisible(true);
-	};
+    dispatch(setLoadingStatus(true))
+    setIsModalVisible(true);
+    setUserSelected(record);
+    form.setFieldsValue(record);
+  };  
 
 	const handleOpenDeleteUser = (record: UserRecord) => {
 		setOpenModalDel(true);
+    setUserSelected(record);
 	};
 
 	const handelCancelCreateUser = () => {
@@ -112,15 +136,27 @@ const VehicleManage: React.FC = () => {
 	};
 
 	const handleAddUser = () => {
+    setUserSelected(null);
 		setIsModalVisible(true);
+    form.resetFields();
+
 	};
-	const handleDeleteUser = () => {
-		// TODO call api delete
-		setOpenModalDel(false);
+	const handleDeleteUser = async() => {
+    dispatch(setLoadingStatus(true))
+    if (userSelected) {
+      await dispatch(deleteVehicleAsync(userSelected.id));
+      setOpenModalDel(false);
+    }
 	};
-	const onSearch = () => {
-		console.log("ok");
-	};
+
+	const onSearch = (value: any) => {
+    dispatch(toggleSetKeyword(value));
+    const params = {
+      page: pageNumber + 1,
+      size: pageSize,
+    };
+    dispatch(getSescueServiceAsync(params));
+  };
 
 	return (
 		<div className="wrapper_user">
@@ -147,7 +183,7 @@ const VehicleManage: React.FC = () => {
 							setIsSearch(true);
 							setPageNumber(0);
 							setPageSize(10);
-							onSearch();
+							onSearch(e);
 						}}
 					/>
 				</div>
@@ -167,141 +203,34 @@ const VehicleManage: React.FC = () => {
 				<div>
 					<ModalComponent
 						visible={isModalVisible}
-						title={t("add_unit_service")}
+            title={userSelected ? t('edit_unit_service') : t('add_unit_service')}
 						onOk={() => form.submit()}
 						width="48rem"
 						onCancel={handelCancelCreateUser}
-						okText={t("save")}>
+						okText={t("save")}
+          >
 						<Form
 							form={form}
 							name="validateOnly"
 							onFinish={handleSubmit}
 							layout="vertical"
 							autoComplete="off"
-							className="form-add-edit">
-							<Row gutter={24}>
-								<Col span={12}>
-									<Form.Item
-										name="username"
-										label={t("unit_name")}
-										rules={[
-											{
-												required: true,
-												whitespace: true,
-												message: `${t("unit_name")}${t("not_empty")}`,
-											},
-											{
-												max: 50,
-												message: `${t("unit_name")}${t("name_too_long")}`,
-											},
-										]}>
-										<Input />
-									</Form.Item>
-								</Col>
-								<Col span={12}>
-									<Form.Item
-										name="address"
-										label={t("address")}
-										rules={[
-											{
-												required: true,
-												whitespace: true,
-												message: `${t("rule_user")}${t("not_empty")}`,
-											},
-											{
-												max: 100,
-												message: `${t("rule_user")}${t("name_too_long")}`,
-											},
-										]}>
-										<Input />
-									</Form.Item>
-								</Col>
-								<Col span={12}>
-									<Form.Item
-										name="email"
-										label={t("email")}
-										rules={[
-											{
-												required: true,
-												whitespace: true,
-												message: `${t("email")}${t("not_empty")}`,
-											},
-											{
-												pattern:
-													/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-												message: t("not_empty"),
-											},
-										]}>
-										<Input.Password />
-									</Form.Item>
-								</Col>
-								<Col span={12}>
-									<Form.Item
-										name="mobile"
-										label={t("phone_number")}
-										rules={[
-											{
-												required: true,
-												message: `${t("phone_number")} ${t("not_empty")}`,
-											},
-											{
-												pattern: /^[0-9]+$/, 
-												message: `${t("phone_number")} ${t(
-													"must_be_number"
-												)}`,
-											},
-										]}>
-										<Input />
-									</Form.Item>
-								</Col>
-
-								<Col span={12}>
-									<Form.Item
-										name="local_x"
-										label={"Local X"}
-										rules={[
-											{
-												required: true,
-												message: `${t("local_x")} ${t("not_empty")}`,
-											},
-											{
-												type: "number",
-												message: `${t("local_x")} ${t("must_be_number")}`,
-											},
-										]}>
-										<Input type="number" step="any" />
-									</Form.Item>
-								</Col>
-								<Col span={12}>
-									<Form.Item
-										name="local_y"
-										label={"Local Y"}
-										rules={[
-											{
-												required: true,
-												message: `${t("local_y")} ${t("not_empty")}`,
-											},
-											{
-												type: "number",
-												message: `${t("local_y")} ${t("must_be_number")}`,
-											},
-										]}>
-										<Input type="number" step="any" />
-									</Form.Item>
-								</Col>
-							</Row>
+							className="form-add-edit"
+            >
+              <Form.Item name='id' style={{ display: 'none' }}>
+                <Input />
+              </Form.Item>
+							<VehicleManaForm userId={userSelected?.id || null}/>
 						</Form>
 					</ModalComponent>
 					<ModalComponent
 						title={t("delete_user")}
 						visible={openModalDel}
 						icon={<PiWarningFill className="icon-warning mt-2" />}
-						onOk={() => form.submit()}
-						onCancel={handleDeleteUser}
+					  onOk={handleDeleteUser}
+            onCancel={() => setOpenModalDel(false)}
 						okText={t("confirm")}>
-						<p className="text-confirm text-lg text-center mb-10">
-							{t("confirm_delete_user")}
-						</p>
+						<p className="text-confirm text-lg text-center mb-10">{`${t('text_confirm_del')} ${userSelected?.name}  ${t('no')} ?`}</p>
 					</ModalComponent>
 				</div>
 			</div>

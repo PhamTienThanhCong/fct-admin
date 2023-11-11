@@ -1,11 +1,6 @@
 import { BellOutlined, UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { DashboardTwoTone } from "@ant-design/icons";
 import { FaStore  } from 'react-icons/fa';
-import AccessForbidden from "../../modules/auth/AccessForbidden";
-
-const injectProps = (props :any, Component :any) => {
-  return <Component {...props} />
-}
 
 export const ADMIN_SLIDER = [
 	{
@@ -32,40 +27,53 @@ export const ADMIN_SLIDER = [
 				link: "/listUser/user",
 				title: "list_user",
 			},
-            {
-                key: "2.3",
-                link: "/listUser/customer",
-                title: "list_customer",
-            }
+      {
+        key: "5",
+        link: "/list_customer",
+        title: "list_customer",
+      }
 		],
 	},
 	{
-		key: "5",
+		key: "6",
 		icon: <FaStore  />,
 		link: "/manage_supplier",
 		title: "manage_supplier",
 		subMenu: [
 			{
-				key: "6",
+				key: "7",
 				link: "/rescue_service",
 				title: "rescue_service",
 			},
 			{
-				key: "7",
+				key: "8",
 				link: "/car_type",
 				title: "car_type",
 			}
 		],
 	},
+  {
+		key: "9",
+		icon: <FaStore  />,
+		link: "/manage_station",
+		title: "manage_station",
+		subMenu: [
+			{
+				key: "10",
+				link: "/list_station",
+				title: "list_station",
+			}
+		],
+	},
 	{
-		key: "8",
+		key: "11",
 		icon: <BellOutlined />,
 		link: "/notification",
 		title: "notification",
 		subMenu: undefined,
 	},
 	{
-		key: "9",
+		key: "12",
 		icon: <UserOutlined />,
 		link: "/myAccount",
 		title: "account",

@@ -63,5 +63,9 @@
     "exception_api": "An unexpected error has occurred.",
     "access_forbidden": "Not this time, access forbidden!",
     "edit_carType_success": "Edit car type successfully",
+    "text_confirm_del" : "Are you sure you want to delete?",
+    "no" : "not",
+    "manage_station" : "charging station manage",
+    "list_station" : "List of charging stations",
     "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
 }

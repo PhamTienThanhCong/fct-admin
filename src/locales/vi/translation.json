@@ -66,5 +66,9 @@
     "access_forbidden": "Cấm truy cập!",
     "exception_api": "Một lỗi không mong muốn đã xảy ra.",
     "edit_carType_success": "Cập nhật kiểu xe thành công",
+    "text_confirm_del": "Bạn có chắc muốn xóa",
+    "no": "không",
+    "manage_station" : "Quản lý trạm sạc",
+    "list_station" : "Danh sách trạm sạc",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

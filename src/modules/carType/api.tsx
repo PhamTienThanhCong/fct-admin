@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export const getCarType = async (params:any) => {
-	return await axios.get('/car-type/',{params:params})
+	return await axios.get('/car-type',{params:params})
 }
 
 export const createCarType = async (params:any) => {
-	return await axios.post('/car-type/',params)
+	return await axios.post('/car-type',params)
 }
 
 export const updateCarType = async (id:string, params:any) => {
