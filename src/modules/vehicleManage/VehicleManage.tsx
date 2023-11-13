@@ -5,7 +5,7 @@ import CustomButton from "../../controllers/common/custombutton/CustomButton";
 import { IoMdAdd } from "react-icons/io";
 import ModalComponent from "../../controllers/common/modal/BaseModal";
 import { PiWarningFill } from "react-icons/pi";
-import { Col, Form, Input, Row } from "antd";
+import { Form, Input } from "antd";
 import { useTranslation } from "react-i18next";
 import PageTitle from "../../layouts/components/Pagetitle";
 import DynamicList from "../../controllers/common/customList/DynamicList";
@@ -39,6 +39,11 @@ const VehicleManage: React.FC = () => {
   const [userSelected, setUserSelected] = useState<UserRecord | null>(null);
 
 	const columns = [
+    {
+			title: t("id"),
+			dataIndex: "id",
+			width: 100,
+		},
 		{
 			title: t("unit_name"),
 			dataIndex: "name",
@@ -100,6 +105,7 @@ const VehicleManage: React.FC = () => {
 
 	const handleSubmit = async (values: UserRecord) => {
     const params = {
+      id: values.name,
       name: values.name,
       phone: values.phone,
       address: values.address,

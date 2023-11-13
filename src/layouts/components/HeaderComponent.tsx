@@ -33,13 +33,13 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
     const RoleUser = roles.find((role) => role.id === currentUser.role_id);
 
     useEffect(() => {
-        if (!isFetchingRole) {
-          dispatch(getRole({}));
-          dispatch(setLoadingStatus(false));
-        } else {
-          dispatch(setLoadingStatus(true));
-        }
-      }, [dispatch, isFetchingRole]);
+      if (!isFetchingRole) {
+        dispatch(getRole({}));
+        dispatch(setLoadingStatus(false));
+      } else {
+        dispatch(setLoadingStatus(true));
+      }
+    }, [dispatch, isFetchingRole]);
 
 	
 
@@ -102,7 +102,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = (props) => {
 							</a>
 						</Badge>
 					</Col>
-					<Col sm={12} md={4}>
+					<Col sm={12} md={5}>
 						<Dropdown overlay={menu} trigger={["click"]} className="dropdown">
 							<div className="account-header">
 								<img 

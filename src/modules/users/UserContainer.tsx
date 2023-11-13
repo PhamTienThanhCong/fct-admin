@@ -126,6 +126,7 @@ const UserContainer: React.FC = () => {
     handelCancelCreateUser();
     dispatch(setLoadingStatus(false));
   };
+  
   const handleEditUser = (record: IUser) => {
     setIsModalVisible(true);
     form.setFieldsValue(record);

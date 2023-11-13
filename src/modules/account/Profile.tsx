@@ -1,30 +1,31 @@
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import CustomButton from "../../controllers/common/custombutton/CustomButton";
 import { BsCheckLg } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import { useAppSelector } from "../../config/hooks";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../users/api";
 
-const fakeData = {
-  fullName: "John Doe",
-  role: "Admin", // Chỉ chọn một quyền
-  name: "john.doe",
-  mobile: "0123456789",
-  address: "123 Main Street, City, Country",
-};
-const fakeListRole = ["Admin", "User", "Manager", "Guest"];
 
 const Profile = (props: any) => {
+  const {currentUser} = useAppSelector((state) => state.auth);
   const { t } = useTranslation("translation");
-  const [form] = Form.useForm();
+  const [form] = Form.useForm(); 
+  const dispatch = useDispatch<any>();
+  const roles = useAppSelector((state) => state.role.Roles);
+  const RoleUser = roles.find((role) => role.id === currentUser.role_id);
 
   useEffect(() => {
-    form.setFieldsValue(fakeData);
-  }, [form]);
+    if (currentUser?.full_name) {
+      form.setFieldsValue(currentUser)
+    }
+  }, [form, currentUser])
 
   const onFinishPersonalInfo = async (values: any) => {
-    console.log("ok");
-  };
-
+    props.onFinishPersonalInfo(values)
+  }
+  
   return (
     <div className="profile">
       <Form form={form} layout="vertical" onFinish={onFinishPersonalInfo}>
@@ -32,40 +33,29 @@ const Profile = (props: any) => {
           <Col className="gutter-row pr-0" xs={24} sm={24} md={12}>
             <Form.Item
               label={t("full_name")}
-              name="fullName"
+              name="full_name"
               className="w-full"
               rules={[{ min: 3, message: t("minimum_length_characters") }]}
             >
-              <Input size="large" maxLength={50} />
+              <Input size="large" maxLength={50}/>
             </Form.Item>
           </Col>
-          <Col className="gutter-row pr-0" xs={24} sm={24} md={12}>
-            <Form.Item label={t("role")} name="role" className="w-full">
-              <Select
-                allowClear
-                style={{ width: "100%" }}
-                size="large"
-                disabled
-              >
-                {fakeListRole.map((role) => (
-                  <Select.Option key={role} value={role}>
-                    {role}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
+          <Col className='gutter-row pr-0' xs={24} sm={24} md={12}>
+          <Form.Item label={t('role')} className='w-full'>
+            <Input size='large' disabled value={RoleUser?.name} />
+          </Form.Item>
+        </Col>
         </Row>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="w-full">
           <Col className="gutter-row pr-0" xs={24} sm={24} md={12}>
-            <Form.Item label={t("name")} name="name" className="w-full">
+            <Form.Item label={t("email")} name="email" className="w-full">
               <Input size="large" disabled />
             </Form.Item>
           </Col>
           <Col className="gutter-row pr-0" xs={24} sm={24} md={12}>
             <Form.Item
               label={t("phone_number")}
-              name="mobile"
+              name="phone"
               className="w-full"
               rules={[
                 {
@@ -75,6 +65,7 @@ const Profile = (props: any) => {
               ]}
             >
               <Input size="large" maxLength={15} />
+           
             </Form.Item>
           </Col>
         </Row>

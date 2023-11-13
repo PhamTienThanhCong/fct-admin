@@ -6,11 +6,15 @@ import { Col, Divider, Menu, Row } from 'antd';
 import ChangeAvata from './ChangeAvata';
 import Profile from '../account/Profile';
 import ChangePassword from './ChangePassword';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../users/api';
 
 const MyAccount = () => {
   const { t } = useTranslation('translation')
+  const dispatch = useDispatch<any>()
   const [selectedMenuItem, setSelectedMenuItem] = useState('1')
   const [titleTabActive, setTitleTabActive] = useState<string>()
+
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -44,6 +48,13 @@ const MyAccount = () => {
     }
   },[selectedMenuItem,t])
 
+  const onFinishPersonalInfo = async (values: any) => {
+    delete values?.role
+    delete values?.userName
+    await dispatch(updateUser(values))
+  }
+
+
   return(
     <div className='main-container'>
       <div className='view-container'>
@@ -55,7 +66,7 @@ const MyAccount = () => {
             <div className='title-avata'>{titleTabActive}</div>
             <Divider />
             {selectedMenuItem === '1' && <ChangeAvata/>}
-            {selectedMenuItem === '2' && <Profile/>}
+            {selectedMenuItem === '2' && <Profile onFinishPersonalInfo={onFinishPersonalInfo}/>}
             {selectedMenuItem === '3' && <ChangePassword/>}
           </Col>
         </Row>

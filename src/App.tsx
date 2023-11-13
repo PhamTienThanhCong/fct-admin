@@ -13,7 +13,6 @@ import MyAccount from "./modules/account/MyAccount";
 import VehicleManage from "./modules/vehicleManage/VehicleManage";
 import CarType from "./modules/carType/CarType";
 import AccessForbidden from "./modules/auth/AccessForbidden";
-import ListCustomer from "./modules/customer/ListCustomer";
 import ListStation from "./modules/station/ListStation";
 import CustomerContainer from "./modules/customer/CustomerContainer";
 

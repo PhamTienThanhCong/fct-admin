@@ -10,30 +10,16 @@ import PageTitle from '../../layouts/components/Pagetitle';
 import DynamicList from '../../controllers/common/customList/DynamicList';
 import { RootState } from '../../config/store';
 import { useDispatch, useSelector } from 'react-redux';
-// import CarTypeForm from './CarTypeForm';
 import { setLoadingStatus } from '../global/slices';
 import ListStationForm from './ListStationForm';
+import { StationRecord } from '../../types/station/station';
+import { createStationAsync, getListStationAsync, updateStationAsync } from './slices';
+import { toggleSetKeyword } from '../carType/slices';
 
 const { Search } = Input;
 
-interface UserRecord {
-  name: string;
-  description: string;
-  address: string;
-  local_x: number;
-  local_y: number;
-  phone: string;
-  email: string;
-  image: string;
-  open_time: string; 
-  close_time: string; 
-  is_order: number;
-  id: number;
-  owner_id: number;
-}
-
 const ListStation: React.FC = () => {
-  const { listCarType, keyword } = useSelector((state: RootState) => state.carType);
+  const { listStation, keyword } = useSelector((state: RootState) => state.station);
   const { t } = useTranslation('translation');
   const dispatch = useDispatch<any>();
 
@@ -43,13 +29,53 @@ const ListStation: React.FC = () => {
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(10);
   const [isSearch, setIsSearch] = useState(false);
-  const [userSelected, setUserSelected] = useState<UserRecord | null>(null);
+  const [userSelected, setUserSelected] = useState<StationRecord | null>(null);
 
   const handleSubmit = async (values: any) => {
+    const params = {
+      name: values.name,
+      description: values.description,
+      address: values.address,
+      local_x: values.local_x,
+      local_y: values.local_y,
+      phone: values.phone,
+      email: values.email,
+      image: values.image,
+      open_time: values.open_time, 
+      close_time: values.close_time, 
+      is_order: values.is_order,
+      id: values.id,
+      owner_id: values.owner_id,
+    }
+
+    dispatch(setLoadingStatus(true))
+    if(userSelected){
+      await dispatch(updateStationAsync({id : userSelected.id, params}))
+    }else {
+      await dispatch(createStationAsync(params))
+    }
     setIsModalVisible(false);
     form.resetFields();
+    onSearch(keyword)
   };
+
+  useEffect(()=>{
+    if(!isSearch){
+      const param = {
+        page: pageNumber + 1,
+        size: pageSize,
+      }
+      dispatch(getListStationAsync(param))
+    }
+  },[dispatch,pageNumber,pageSize,isSearch])
+  
+
   const columns = [
+    {
+      title: "id",
+      dataIndex: 'id',
+      width: 100,
+    },
     {
       title: "Tên",
       dataIndex: 'name',
@@ -97,13 +123,13 @@ const ListStation: React.FC = () => {
       ),
     },
   ];
-  const handleEditUser = (record: UserRecord) => {
+  const handleEditUser = (record: StationRecord) => {
     setUserSelected(record);
     form.setFieldsValue(record);
     setIsModalVisible(true);
   };
 
-  const handleOpenDeleteUser = (record: UserRecord) => {
+  const handleOpenDeleteUser = (record: StationRecord) => {
     setUserSelected(record);
     setOpenModalDel(true);
   };
@@ -123,7 +149,12 @@ const ListStation: React.FC = () => {
   };
 
   const onSearch = (value: any) => {
-    console.log('ok')
+    dispatch(toggleSetKeyword(value))
+    const params = {
+      page: pageNumber + 1,
+      size: pageSize,
+    };
+    dispatch(getListStationAsync(params))
   };
 
 return (
@@ -157,11 +188,11 @@ return (
         </div>
         <DynamicList
           keyId="id"
-          listData={listCarType}
+          listData={listStation}
           listColumn={columns}
           pageNumber={pageNumber}
           pageSize={pageSize}
-          totalCount={listCarType.length}
+          totalCount={listStation.length}
           onPageChange={(pageNumber, pageSize) => {
             setPageNumber(pageNumber);
             setPageSize(pageSize);
@@ -184,7 +215,7 @@ return (
               autoComplete="off"
               className="form-add-edit"
             >
-              <Form.Item name='id' style={{ display: 'none' }}>
+              <Form.Item name='id' hidden>
                 <Input />
               </Form.Item>
               <ListStationForm userId={userSelected?.id || null} />

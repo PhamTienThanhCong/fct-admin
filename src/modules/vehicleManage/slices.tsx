@@ -102,7 +102,6 @@ export const vehicleSlice = createSlice({
     toggleSetKeyword: (state,action) =>{
       state.keyword = action.payload || ''
     },
-    
 	},
 	extraReducers:(builder)=>{
     builder

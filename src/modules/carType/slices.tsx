@@ -1,12 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toggleLoadingStatus } from "../global/slices";
 import { createCarType, deleteCarType, getCarType, updateCarType } from "./api";
-import { CarTypeState} from "../../types/roles";
+import { CarTypeState } from "../../types/carType/carType";
 
-const initialState: CarTypeState = {
-  listCarType:[],
-  keyword:''
-};
 
 export const getListCarTypeAsync = createAsyncThunk<any, any>(
   "car/getCarType",
@@ -74,6 +70,11 @@ export const deleteCarTypeAsync = createAsyncThunk<any, any>(
   }
 );
 
+const initialState: CarTypeState = {
+  listCarType:[],
+  keyword:''
+};
+
 export const carTypeSlice = createSlice({
   name: "carType",
   initialState,
@@ -98,7 +99,6 @@ export const carTypeSlice = createSlice({
       }
     })
     
-    builder
     .addCase(createCarTypeAsync.fulfilled, (state, action)=>{
 			state.listCarType = [...state.listCarType, action.payload]
 		})

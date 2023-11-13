@@ -13,5 +13,5 @@ export const updateRescueService = async (id:number,params:any) =>{
 }
 
 export const deleteRescueService = async (id:any) =>{
-    return await axios.delete(`/rescue-service/${id}`);
+    return await axios.delete(`/rescue-service/${id}`)
 }

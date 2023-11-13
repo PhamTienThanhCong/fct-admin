@@ -11,6 +11,24 @@ const VehicleManaForm: React.FC<VehicleFormProps> = ({ userId }) => {
     <Row gutter={24}>
       <Col span={12}>
         <Form.Item
+          name="id"
+          label={t("id")}
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: `${t("id")}${t("not_empty")}`,
+            },
+            {
+              max: 50,
+              message: `${t("id")}${t("name_too_long")}`,
+            },
+          ]}>
+          <Input disabled={!!userId} />
+        </Form.Item>
+      </Col>
+      <Col span={12}>
+        <Form.Item
           name="name"
           label={t("unit_name")}
           rules={[

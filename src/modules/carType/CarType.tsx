@@ -39,6 +39,7 @@ const CarType: React.FC = () => {
   const handleSubmit = async (values: any) => {
     
     const params = {
+      id: values.id,
       name: values.name,
       country: values.country,
       description: values.description,
@@ -66,6 +67,11 @@ const CarType: React.FC = () => {
 
   const columns = [
     {
+      title: t('Mã xe'),
+      dataIndex: 'id',
+      width: 150,
+    },
+    {
       title: t('name_car_type'),
       dataIndex: 'name',
       width: 250,
@@ -87,7 +93,7 @@ const CarType: React.FC = () => {
       render: (text: string, record: UserRecord) => (
         <div className="action-buttons-container">
           <EditOutlined onClick={() => handleEditUser(record)} className="icon-action-edit" />
-          <DeleteOutlined onClick={() => handleOpenDeleteUser(record)} className="icon-action-delete" />n
+          <DeleteOutlined onClick={() => handleOpenDeleteUser(record)} className="icon-action-delete" />
         </div>
       ),
     },
@@ -192,10 +198,10 @@ return (
               autoComplete="off"
               className="form-add-edit"
             >
-              <Form.Item name='id' style={{ display: 'none' }}>
+              <Form.Item name='id' hidden>
                 <Input />
               </Form.Item>
-              <CarTypeForm userId={userSelected?.id || null} />
+              <CarTypeForm userId={userSelected ? userSelected.id : null} />
             </Form>
           </ModalComponent>
           <ModalComponent
