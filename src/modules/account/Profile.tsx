@@ -4,21 +4,17 @@ import CustomButton from "../../controllers/common/custombutton/CustomButton";
 import { BsCheckLg } from "react-icons/bs";
 import { useAppSelector } from "../../config/hooks";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { updateUser } from "../users/api";
 
 
 const Profile = (props: any) => {
   const {currentUser} = useAppSelector((state) => state.auth);
   const { t } = useTranslation("translation");
   const [form] = Form.useForm(); 
-  const dispatch = useDispatch<any>();
-  const roles = useAppSelector((state) => state.role.Roles);
-  const RoleUser = roles.find((role) => role.id === currentUser.role_id);
 
   useEffect(() => {
     if (currentUser?.full_name) {
       form.setFieldsValue(currentUser)
+      console.log(currentUser)
     }
   }, [form, currentUser])
 
@@ -41,10 +37,10 @@ const Profile = (props: any) => {
             </Form.Item>
           </Col>
           <Col className='gutter-row pr-0' xs={24} sm={24} md={12}>
-          <Form.Item label={t('role')} className='w-full'>
-            <Input size='large' disabled value={RoleUser?.name} />
-          </Form.Item>
-        </Col>
+            <Form.Item label={t('description')} name="title" className='w-full'>
+              <Input size='large' disabled  />
+            </Form.Item>
+          </Col>
         </Row>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="w-full">
           <Col className="gutter-row pr-0" xs={24} sm={24} md={12}>
@@ -65,7 +61,6 @@ const Profile = (props: any) => {
               ]}
             >
               <Input size="large" maxLength={15} />
-           
             </Form.Item>
           </Col>
         </Row>
@@ -89,6 +84,7 @@ const Profile = (props: any) => {
               />
             </Form.Item>
           </Col>
+          
         </Row>
       </Form>
     </div>

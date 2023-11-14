@@ -33,7 +33,6 @@ const UserContainer: React.FC = () => {
 
   const users = useAppSelector((state) => state.user.users);
   const isFetching = useAppSelector((state) => state.user.isFetching);
-
   const roles = useAppSelector((state) => state.role.Roles);
   const isFetchingRole = useAppSelector((state) => state.role.isFetching);
 
