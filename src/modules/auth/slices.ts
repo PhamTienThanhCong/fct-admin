@@ -12,6 +12,7 @@ const CURRENT_USER = {
   card_id: "",
   title: "",
   description: "",
+  password:""
 }
 
 const initialState: AuthState = {

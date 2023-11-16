@@ -8,18 +8,18 @@ export interface IUser {
   card_id: string | null;
   title: string | null;
   description: string | null
+  password:string | null
 }
-
 export interface UserPayload {
   id?: number;
-  role_id: string | null | number;
+  role_id: string | number | null;
   email: string | null;
   full_name: string | null;
   phone: string | null;
   address: string | null;
   card_id: string | null;
   title: string | null;
-  description: string | null
+  description: string | null;
 }
 
 export interface AuthState {

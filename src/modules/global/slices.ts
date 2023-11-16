@@ -23,4 +23,7 @@ export const globalSlice = createSlice({
 		},
 	},
 });
+
 export const { toggleLoadingStatus, setMessageText, setSeverity, setLoadingStatus } = globalSlice.actions;
+
+export default globalSlice.reducer

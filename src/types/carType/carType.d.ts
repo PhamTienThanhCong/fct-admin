@@ -1,5 +1,4 @@
 
-
 export interface CartypeRecord {
     id: string;
     name: string;
@@ -7,6 +6,6 @@ export interface CartypeRecord {
     description: string;
   }
 export interface CarTypeState {
-    listCarType : CartypeRecord[],
-    keyword: '';
+  listCarType : CartypeRecord[],
+  keyword: string;
 }

@@ -11,7 +11,7 @@ import PageTitle from "../../layouts/components/Pagetitle";
 import DynamicList from "../../controllers/common/customList/DynamicList";
 import { useAppDispatch, useAppSelector } from "../../config/hooks";
 import { IUser } from "../../types/users";
-import { createUser, deleteUser, getUser } from "./api";
+import { createUser, deleteUser, getUser, updateUser } from "./api";
 import { setLoadingStatus } from "../global/slices";
 import { getRole } from "../role/api";
 import { OBJECT_INPUT } from "../../constants/user";
@@ -118,7 +118,7 @@ const UserContainer: React.FC = () => {
     dispatch(setLoadingStatus(true));
     const values = form.getFieldsValue();
     if (form.getFieldValue("id")) {
-      await dispatch(createUser({ ...values, id: form.getFieldValue("id") }));
+      await dispatch(updateUser({ ...values, id: form.getFieldValue("id") }));
     } else {
       await dispatch(createUser(values));
     }
@@ -153,8 +153,11 @@ const UserContainer: React.FC = () => {
     }
     setOpenModalDel(false);
   };
-  const onSearch = () => {
-    console.log("ok");
+  const onSearch = (value: string) => {
+    setIsSearch(true);
+    setPageNumber(0);
+    setPageSize(10);
+    dispatch(getUser({ search: value }));
   };
 
   return (
@@ -178,12 +181,7 @@ const UserContainer: React.FC = () => {
             allowClear
             enterButton
             size="large"
-            onSearch={(e) => {
-              setIsSearch(true);
-              setPageNumber(0);
-              setPageSize(10);
-              onSearch();
-            }}
+            onSearch={onSearch}
           />
         </div>
         <DynamicList

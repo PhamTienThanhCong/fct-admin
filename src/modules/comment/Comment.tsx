@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import '../notification/Notification.scss';
+import React, {useEffect, useState} from 'react';
+import './comment.scss';
 import { DeleteOutlined } from '@ant-design/icons';
 import { TbArrowForwardUp } from 'react-icons/tb';
 import moment from 'moment';
@@ -10,92 +10,46 @@ import { PiWarningFill } from 'react-icons/pi'
 import PageTitle from '../../layouts/components/Pagetitle';
 import { useTranslation } from 'react-i18next';
 import DynamicList from '../../controllers/common/customList/DynamicList';
-
-interface UserRecord {
-  key: React.Key;
-  name: string;
-  time: Date;
-  content: string;
+import { CommentPayload } from '../../types/comment/comment';
+import { RootState } from '../../config/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getlistCommentAsync } from './slice';
+ 
+interface CommentProps {
+  station_id?: number; // Make station_id optional
 }
-const Notification: React.FC = () => {
+
+
+const Comment = ({ station_id }: CommentProps) => {
+  const { listComment, keyword } = useSelector((state: RootState) => state.comment);
+  const dispatch = useDispatch<any>();
   const { t } = useTranslation('translation')
 	const [isModalVisible, setIsModalVisible] = useState(false)
 	const [openModalDel, setOpenModalDel] = useState(false)
-  const [form] = Form.useForm()
-  const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
+  const [form] = Form.useForm();
+  const [pageNumber, setPageNumber] = useState<number>(0);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [station,setStation] = useState<number>(0);
   const [isSearch, setIsSearch] = useState(false);
-
-  const data: UserRecord[] = [
-    {
-      key: '1',
-      name: 'Notification 1',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 1',
-    },
-    {
-      key: '2',
-      name: 'Notification 2',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 2',
-    },
-    {
-      key: '3',
-      name: 'Notification 3',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 3',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-    {
-      key: '4',
-      name: 'Notification 4',
-      time: new Date(2023, 9, 10, 14, 30),
-      content: 'Nội dung thông báo 4',
-    },
-  ];
   
+  useEffect(() => {
+    if (station_id) {
+      dispatch(getlistCommentAsync(station_id));
+    }
+  }, [dispatch, station_id])
 
   const columns = [
     {
-      title: t('name'),
-      dataIndex: 'name',
-      width: 200,
+      title: t('id'),
+      dataIndex: 'id',
+      width: 100,
     },
     {
-      title: t('time'),
-      dataIndex: 'time',
-      width: 200,
-			render: (text: string, record: UserRecord) => (
-				<span>{moment(record.time).format('YYYY-MM-DD HH:mm:ss')}</span>
+      title: t('created_at'),
+      dataIndex: 'created_at',
+      width: 150,
+			render: (text: string, record: CommentPayload) => (
+				<span>{moment(record.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>
 			),
     },
     {
@@ -104,31 +58,47 @@ const Notification: React.FC = () => {
       width: 250,
     },
     {
+      title: t('station_id'),
+      dataIndex: 'station_id',
+      width: 100,
+    },
+    {
+      title: t('title'),
+      dataIndex: 'title',
+      width: 250,
+    },
+    {
+      title: t('rating'),
+      dataIndex: 'rating',
+      width: 100,
+    },
+    {
       title: t('action'),
       className: 'action-column',
-      width: 200,
+      width: 150,
       dataIndex: 'action',
-      render: (text: string, record: UserRecord) => (
+      render: (text: string, record: CommentPayload) => (
         <div className="action-buttons-container">
-            <TbArrowForwardUp
-              onClick={() => handleReply(record)}
-              className="icon-action-reply"
-							style={{fontSize:'20px'}}
-            />
-            <DeleteOutlined
-              onClick={() => handleOpenDeleteUser(record)}
-              className="icon-action-delete"
-            />
+          <TbArrowForwardUp
+            onClick={() => handleReply(record)}
+            className="icon-action-reply"
+            style={{fontSize:'20px'}}
+          />
+          <DeleteOutlined
+            onClick={() => handleOpenDeleteUser(record)}
+            className="icon-action-delete"
+          />
         </div>
       ),
     },
   ];
 
+
 	const handleDeleteUser = () => {
     // TODO call api delete
     setOpenModalDel(false)
   }
-	const handleOpenDeleteUser = (record: UserRecord) => {
+	const handleOpenDeleteUser = (record: CommentPayload) => {
     setOpenModalDel(true)
   };
 
@@ -139,10 +109,10 @@ const Notification: React.FC = () => {
 		form.resetFields()
     setIsModalVisible(false)
 	}
-	const handleReply = (record: UserRecord)=>{
+	const handleReply = (record: CommentPayload)=>{
 		setIsModalVisible(true)
 	}
-	const handleDelete = (record: UserRecord)=>{
+	const handleDelete = (record: CommentPayload)=>{
 		setIsModalVisible(true)
 	}
 
@@ -152,11 +122,11 @@ const Notification: React.FC = () => {
         <PageTitle title={t('notification')}/>
         <DynamicList
           keyId='key'
-          listData={data}
+          listData={listComment}
           listColumn={columns}
           pageNumber={pageNumber}
           pageSize={pageSize}
-          totalCount={data.length}
+          totalCount={listComment.length}
           onPageChange={(pageNumber, pageSize) => {
             setPageNumber(pageNumber);
             setPageSize(pageSize);
@@ -222,4 +192,4 @@ const Notification: React.FC = () => {
 	);
 }
 
-export default Notification;
+export default Comment;

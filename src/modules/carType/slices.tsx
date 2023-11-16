@@ -12,7 +12,7 @@ export const getListCarTypeAsync = createAsyncThunk<any, any>(
       const { keyword } = thunkAPI.getState().carType;
       const params = keyword ? { keyword: encodeURIComponent(keyword) } : {};
       const response = await getCarType({ ...payload, ...params });
-      return response.data;
+      return response.data
     } catch (error) {
       console.error("Error in getListCarTypeAsync:", error);
       throw error;
@@ -29,7 +29,7 @@ export const createCarTypeAsync = createAsyncThunk<any, any>(
       thunkAPI.dispatch(toggleLoadingStatus());
       const response = await createCarType(payload);
       thunkAPI.dispatch(toggleLoadingStatus());
-      return response.data;
+      return response
     } catch (error) {
       console.error("Error in createCarTypeAsync:", error);
       throw error;

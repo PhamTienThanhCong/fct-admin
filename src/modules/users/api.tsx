@@ -11,6 +11,7 @@ export const getUser = createAsyncThunk<IUser[], any>("user/getUser", async (pay
 });
 
 // crud
+
 export const createUser = createAsyncThunk<IUser, UserPayload>("user/createUser", async (payload, thunkApi) => {
     const res = await sendRequest('/user', {
         thunkApi,
@@ -26,7 +27,7 @@ export const updateUser = createAsyncThunk<IUser, UserPayload>("user/updateUser"
         method: "PUT",
         payload: payload
     });
-    return res;
+    return res.data;
 });
 
 export const deleteUser = createAsyncThunk<any, any>("user/deleteUser", async (payload, thunkApi) => {

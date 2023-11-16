@@ -70,5 +70,15 @@
     "no": "không",
     "manage_station" : "Quản lý trạm sạc",
     "list_station" : "Danh sách trạm sạc",
+    "role_id" : "Mã quyền",
+    "card_id" : "Mã Thẻ",
+    "title" : "Tên quyền",
+    "order" : "Đặt chỗ",
+    "list_order" : "Danh sách người đặt chỗ",
+    "manage_question_and_answer" : "Quản lý câu hỏi và câu trả lời",
+    "patterns" : "Ngữ cảnh",
+    "responses" : "Phản hồi",
+    "charging_port_id" : "Mã cổng sạc",
+    "customer_id" : "ID khách hàng",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

@@ -12,16 +12,10 @@ import { RootState } from '../../config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCarTypeAsync, deleteCarTypeAsync, getListCarTypeAsync, toggleSetKeyword, updateCarTypeAsync } from './slices';
 import CarTypeForm from './CarTypeForm';
-import { setLoadingStatus } from '../global/slices';
+import { showAlert } from '../../utils/showAlert';
+import { CartypeRecord } from '../../types/carType/carType';
 
 const { Search } = Input;
-
-interface UserRecord {
-  id: string;
-  name: string;
-  country: string;
-  description: string;
-}
 
 const CarType: React.FC = () => {
   const { listCarType, keyword } = useSelector((state: RootState) => state.carType);
@@ -34,20 +28,20 @@ const CarType: React.FC = () => {
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(10);
   const [isSearch, setIsSearch] = useState(false);
-  const [userSelected, setUserSelected] = useState<UserRecord | null>(null);
+  const [userSelected, setUserSelected] = useState<CartypeRecord | null>(null);
 
   const handleSubmit = async (values: any) => {
-    
     const params = {
       id: values.id,
       name: values.name,
       country: values.country,
       description: values.description,
     };
-    dispatch(setLoadingStatus(true))
     if (userSelected) {
       await dispatch(updateCarTypeAsync({ id: userSelected.id, params }))
+      showAlert("success", "create CarType successfully", 3);
     } else {
+      showAlert("success", "create CarType successfully", 3);
       await dispatch(createCarTypeAsync(params));   
     }
     onSearch(keyword)
@@ -90,7 +84,7 @@ const CarType: React.FC = () => {
       title: t('action'),
       className: 'action-column',
       dataIndex: 'action',
-      render: (text: string, record: UserRecord) => (
+      render: (text: string, record: CartypeRecord) => (
         <div className="action-buttons-container">
           <EditOutlined onClick={() => handleEditUser(record)} className="icon-action-edit" />
           <DeleteOutlined onClick={() => handleOpenDeleteUser(record)} className="icon-action-delete" />
@@ -99,13 +93,13 @@ const CarType: React.FC = () => {
     },
   ];
 
-  const handleEditUser = (record: UserRecord) => {
+  const handleEditUser = (record: CartypeRecord) => {
     setUserSelected(record);
     form.setFieldsValue(record);
     setIsModalVisible(true);
   };
 
-  const handleOpenDeleteUser = (record: UserRecord) => {
+  const handleOpenDeleteUser = (record: CartypeRecord) => {
     setUserSelected(record);
     setOpenModalDel(true);
   };

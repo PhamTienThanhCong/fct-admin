@@ -66,6 +66,16 @@
     "text_confirm_del" : "Are you sure you want to delete?",
     "no" : "not",
     "manage_station" : "charging station manage",
+    "role_id" : "Role id",
     "list_station" : "List of charging stations",
+    "card_id" : "Card id",
+    "title" : "Title",
+    "order" : "Reservations",
+    "manage_question_and_answer" : "Manage questions and answers",
+    "list_order" : "List of reservations",
+    "patterns" :  "Patterns",
+    "charging_port_id" : "Charging port id",
+    "responses" : "Responses",
+    "customer_id" : "Customer ID",
     "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
 }

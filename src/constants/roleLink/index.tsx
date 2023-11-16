@@ -1,6 +1,9 @@
 import { BellOutlined, UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { DashboardTwoTone } from "@ant-design/icons";
-import { FaStore  } from 'react-icons/fa';
+import { RiCommunityLine } from "react-icons/ri";
+import { RiMenuSearchLine } from "react-icons/ri";
+import { ImAddressBook } from "react-icons/im";
+import { BsChatText } from "react-icons/bs";
 
 export const ADMIN_SLIDER = [
 	{
@@ -36,7 +39,7 @@ export const ADMIN_SLIDER = [
 	},
 	{
 		key: "6",
-		icon: <FaStore  />,
+		icon: <RiCommunityLine/>,
 		link: "/manage_supplier",
 		title: "manage_supplier",
 		subMenu: [
@@ -54,7 +57,7 @@ export const ADMIN_SLIDER = [
 	},
   {
 		key: "9",
-		icon: <FaStore  />,
+		icon: <RiMenuSearchLine />,
 		link: "/manage_station",
 		title: "manage_station",
 		subMenu: [
@@ -65,15 +68,35 @@ export const ADMIN_SLIDER = [
 			}
 		],
 	},
-	{
+  {
 		key: "11",
+		icon: <ImAddressBook />,
+		link: "/order",
+		title: "order",
+		subMenu: [
+			{
+				key: "12",
+				link: "/list_order",
+				title: "list_order",
+			}
+		],
+	},
+	{
+		key: "13",
 		icon: <BellOutlined />,
 		link: "/notification",
 		title: "notification",
 		subMenu: undefined,
 	},
 	{
-		key: "12",
+		key: "14",
+		icon: <BsChatText />,
+		link: "/chat",
+		title: "manage_question_and_answer",
+		subMenu: undefined,
+	},
+	{
+		key: "15",
 		icon: <UserOutlined />,
 		link: "/myAccount",
 		title: "account",

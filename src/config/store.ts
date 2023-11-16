@@ -6,9 +6,15 @@ import roleReducer from '../modules/role/slices'
 import userReducer from '../modules/users/slices'
 import customerReducer from '../modules/customer/slices'
 import stationReducer from '../modules/station/slices'
+import orderReducer from '../modules/order/slice'
+import chatReducer from '../modules/chats/slice'
+import commentReducer from '../modules/comment/slice'
 
 export const store = configureStore({
     reducer:{
+      comment:commentReducer,
+      chat:chatReducer,
+      order:orderReducer,
       auth: authReducer,
       carType: carTypeReducer, 
       vehicle : vehicleReducer,
