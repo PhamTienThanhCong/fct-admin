@@ -65,38 +65,43 @@ export const ADMIN_SLIDER = [
 				key: "10",
 				link: "/list_station",
 				title: "list_station",
-			}
+			},
+      {
+				key: "11",
+				link: "/station_ports",
+				title: "station_ports",
+			},
 		],
 	},
   {
-		key: "11",
+		key: "12",
 		icon: <ImAddressBook />,
 		link: "/order",
 		title: "order",
 		subMenu: [
 			{
-				key: "12",
+				key: "13",
 				link: "/list_order",
 				title: "list_order",
 			}
 		],
 	},
 	{
-		key: "13",
+		key: "14",
 		icon: <BellOutlined />,
 		link: "/notification",
 		title: "notification",
 		subMenu: undefined,
 	},
 	{
-		key: "14",
+		key: "15",
 		icon: <BsChatText />,
 		link: "/chat",
 		title: "manage_question_and_answer",
 		subMenu: undefined,
 	},
 	{
-		key: "15",
+		key: "16",
 		icon: <UserOutlined />,
 		link: "/myAccount",
 		title: "account",

@@ -16,9 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getlistCommentAsync } from './slice';
  
 interface CommentProps {
-  station_id?: number; // Make station_id optional
+  station_id?: number | null ;
 }
-
 
 const Comment = ({ station_id }: CommentProps) => {
   const { listComment, keyword } = useSelector((state: RootState) => state.comment);
@@ -29,14 +28,16 @@ const Comment = ({ station_id }: CommentProps) => {
   const [form] = Form.useForm();
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(10);
-  const [station,setStation] = useState<number>(0);
   const [isSearch, setIsSearch] = useState(false);
   
   useEffect(() => {
-    if (station_id) {
-      dispatch(getlistCommentAsync(station_id));
-    }
-  }, [dispatch, station_id])
+    const params = {
+      station_id: station_id || 0,
+      page: pageNumber + 1,
+      size: pageSize,
+    };
+    dispatch(getlistCommentAsync(params));
+  }, [dispatch, station_id, pageNumber, pageSize]);
 
   const columns = [
     {

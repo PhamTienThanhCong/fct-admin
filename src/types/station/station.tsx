@@ -16,5 +16,5 @@ export interface StationRecord {
 }
 export interface StationState {
     listStation : StationRecord[],
-    keyword: '';
+    keyword:string;
 }

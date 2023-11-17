@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getComment = async (station_id: number) => {
-  return await axios.get(`/comment/${station_id}`);
+export const getComment = async (station_id: number, params: any) => {
+  return await axios.get(`/comment/${station_id}`, { params:params });
 };
 
 export const createComment = async (params: any) => {

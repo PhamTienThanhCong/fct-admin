@@ -10,6 +10,7 @@ export const getListCarTypeAsync = createAsyncThunk<any, any>(
     try {
       thunkAPI.dispatch(toggleLoadingStatus());
       const { keyword } = thunkAPI.getState().carType;
+      console.log("Keyword in getListStationAsync:", keyword); 
       const params = keyword ? { keyword: encodeURIComponent(keyword) } : {};
       const response = await getCarType({ ...payload, ...params });
       return response.data

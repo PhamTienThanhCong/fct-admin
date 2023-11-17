@@ -10,11 +10,11 @@ import PageTitle from '../../layouts/components/Pagetitle';
 import DynamicList from '../../controllers/common/customList/DynamicList';
 import { RootState } from '../../config/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoadingStatus } from '../global/slices';
 import ListStationForm from './ListStationForm';
 import { StationRecord } from '../../types/station/station';
-import { createStationAsync, getListStationAsync, updateStationAsync } from './slices';
-import { toggleSetKeyword } from '../carType/slices';
+import { createStationAsync, deleteStationAsync, getListStationAsync, updateStationAsync } from './slices';
+import { toggleSetKeyword } from '../station/slices'
+import { showAlert } from '../../utils/showAlert';
 
 const { Search } = Input;
 
@@ -47,25 +47,25 @@ const ListStation: React.FC = () => {
       id: values.id,
       owner_id: values.owner_id,
     }
-
-    dispatch(setLoadingStatus(true))
     if(userSelected){
       await dispatch(updateStationAsync({id : userSelected.id, params}))
+      showAlert("success", "create CarType successfully", 3);
     }else {
       await dispatch(createStationAsync(params))
+      showAlert("success", "create CarType successfully", 3);
     }
+    onSearch(keyword)
     setIsModalVisible(false);
     form.resetFields();
-    onSearch(keyword)
   };
 
   useEffect(()=>{
     if(!isSearch){
-      const param = {
+      const params = {
         page: pageNumber + 1,
         size: pageSize,
       }
-      dispatch(getListStationAsync(param))
+      dispatch(getListStationAsync(params))
     }
   },[dispatch,pageNumber,pageSize,isSearch])
   
@@ -145,7 +145,14 @@ const ListStation: React.FC = () => {
   };
 
   const handleDeleteUser = async () => {
-    console.log('ol')
+    try {
+      if (userSelected) {
+        await dispatch(deleteStationAsync(userSelected.id));
+        setOpenModalDel(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const onSearch = (value: any) => {
@@ -155,86 +162,87 @@ const ListStation: React.FC = () => {
       size: pageSize,
     };
     dispatch(getListStationAsync(params))
-  };
+  };  
 
 return (
-    <div className="wrapper_user">
-      <div className="item_user">
-        <div className="header_table_user">
-          <PageTitle title={t('list_station')} />
-          <div style={{ marginBottom: '10px' }}>
-            <CustomButton
-              style={{ textAlign: 'center' }}
-              type="primary"
-              item={t('add_car_type')}
-              icon={<IoMdAdd fontSize={16} />}
-              onClick={handleAddUser}
-            />
-          </div>
-        </div>
-        <div className="form-search">
-          <Search
-            placeholder={t('search')}
-            allowClear
-            enterButton
-            size="large"
-            onSearch={(e) => {
-              setPageNumber(0);
-              setPageSize(10);
-              setIsSearch(true);
-              onSearch(e);
-            }}
+  <div className="wrapper_user">
+    <div className="item_user">
+      <div className="header_table_user">
+        <PageTitle title={t('list_station')} />
+        <div style={{ marginBottom: '10px' }}>
+          <CustomButton
+            style={{ textAlign: 'center' }}
+            type="primary"
+            item={t('add_station')}
+            icon={<IoMdAdd fontSize={16} />}
+            onClick={handleAddUser}
           />
         </div>
-        <DynamicList
-          keyId="id"
-          listData={listStation}
-          listColumn={columns}
-          pageNumber={pageNumber}
-          pageSize={pageSize}
-          totalCount={listStation.length}
-          onPageChange={(pageNumber, pageSize) => {
-            setPageNumber(pageNumber);
-            setPageSize(pageSize);
-          }}
-        />
-        <div>
-          <ModalComponent
-            visible={isModalVisible}
-            title={userSelected ? t('edit_user') : t('add_user')}
-            onOk={() => form.submit()}
-            width="48rem"
-            onCancel={handelCancelCreateUser}
-            okText={t('save')}
+      </div>
+      <div className="form-search">
+      <Search
+        placeholder={t('search')}
+        allowClear
+        enterButton
+        size="large"
+        onSearch={(e) => {
+          setPageNumber(0);
+          setPageSize(10);
+          setIsSearch(true);
+          onSearch(e);
+        }}
+      />
+
+      </div>
+      <DynamicList
+        keyId="id"
+        listData={listStation}
+        listColumn={columns}
+        pageNumber={pageNumber}
+        pageSize={pageSize}
+        totalCount={listStation.length}
+        onPageChange={(pageNumber, pageSize) => {
+          setPageNumber(pageNumber);
+          setPageSize(pageSize);
+        }}
+      />
+      <div>
+        <ModalComponent
+          visible={isModalVisible}
+          title={userSelected ? t('edit_station') : t('add_station')}
+          onOk={() => form.submit()}
+          width="48rem"
+          onCancel={handelCancelCreateUser}
+          okText={t('save')}
+        >
+          <Form
+            form={form}
+            name="validateOnly"
+            onFinish={handleSubmit}
+            layout="vertical"
+            autoComplete="off"
+            className="form-add-edit"
           >
-            <Form
-              form={form}
-              name="validateOnly"
-              onFinish={handleSubmit}
-              layout="vertical"
-              autoComplete="off"
-              className="form-add-edit"
-            >
-              <Form.Item name='id' hidden>
-                <Input />
-              </Form.Item>
-              <ListStationForm userId={userSelected?.id || null} />
-            </Form>
-          </ModalComponent>
-          <ModalComponent
-            title={t('delete_user')}
-            visible={openModalDel}
-            icon={<PiWarningFill className="icon-warning mt-2" />}
-            onOk={handleDeleteUser}
-            onCancel={() => setOpenModalDel(false)}
-            okText={t('confirm')}
-            hidenIconSubmit={true}
-          >
-            <p className="text-confirm text-lg text-center mb-10">{`${t('text_confirm_del')} ${userSelected?.name}  ${t('no')} ?`}</p>
-          </ModalComponent>
-        </div>
+            <Form.Item name='id' hidden>
+              <Input />
+            </Form.Item>
+            <ListStationForm userId={userSelected ? userSelected.id : null} />
+          </Form>
+        </ModalComponent>
+        <ModalComponent
+          title={t('delete_user')}
+          visible={openModalDel}
+          icon={<PiWarningFill className="icon-warning mt-2" />}
+          onOk={handleDeleteUser}
+          onCancel={() => setOpenModalDel(false)}
+          okText={t('confirm')}
+          hidenIconSubmit={true}
+        >
+          <p className="text-confirm text-lg text-center mb-10">{`${t('text_confirm_del')} ${userSelected?.name}  ${t('no')} ?`}</p>
+        </ModalComponent>
       </div>
     </div>
+  </div>
   );
 
 };

@@ -17,6 +17,7 @@ import ListStation from "./modules/station/ListStation";
 import CustomerContainer from "./modules/customer/CustomerContainer";
 import Order from "./modules/order/Order";
 import Chat from "./modules/chats/Chat";
+import StationPorts from "./modules/chaging_ports/StationPorts";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="/list_station" element={<ListStation/>} />
               <Route path="/list_order" element={<Order/>} />\
               <Route path="/chat" element={<Chat/>} />
+              <Route path="/station_ports" element={<StationPorts/>} />
             </Route>
           </Route>
           <Route path="/access-forbidden" element={<AccessForbidden/>}/>

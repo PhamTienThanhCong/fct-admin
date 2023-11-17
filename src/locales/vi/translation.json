@@ -80,5 +80,10 @@
     "responses" : "Phản hồi",
     "charging_port_id" : "Mã cổng sạc",
     "customer_id" : "ID khách hàng",
+    "add_station" : "Thêm trạm sạc",
+    "edit_station" : "Sửa trạm sạc",
+    "station_ports" : "Trạm sạc",
+    "add_station_ports" : "Thêm trạm sạc",
+    "edit_station_ports" : "Sửa trạm sạc",
     "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
 }

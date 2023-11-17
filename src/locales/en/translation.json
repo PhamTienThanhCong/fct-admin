@@ -77,5 +77,10 @@
     "charging_port_id" : "Charging port id",
     "responses" : "Responses",
     "customer_id" : "Customer ID",
+    "add_station" : "Add station",
+    "edit_station" : "Edit station",
+    "station_ports" : "Station ports",
+    "add_station_ports" : "Add station ports",
+    "edit_station_ports" : "Edit station ports",
     "rule_password": "Password must include numbers, uppercase letters, lowercase letters, special characters and be 8 characters or more in length"
 }

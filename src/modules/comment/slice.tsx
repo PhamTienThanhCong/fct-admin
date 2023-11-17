@@ -4,27 +4,24 @@ import { CommentState } from "../../types/comment/comment";
 import { createComment, getComment } from "./api";
 
 
-// export const getlistCommentAsync = createAsyncThunk<any, number>(
-// 	"comment/getComment",
-// 	async (station_id: number, thunkAPI: any) => {
-// 	  try {
-// 		thunkAPI.dispatch(toggleLoadingStatus());
-// 		const { keyword } = thunkAPI.getState().carType;
-// 		const params = keyword ? { keyword: encodeURIComponent(keyword) } : {};
-// 		const response = await getComment(station_id, { ...params });
-// 		thunkAPI.dispatch(toggleLoadingStatus());
-// 		return response.data;
-// 	  } catch (error) {
-// 		console.error("Error in getlistCommentAsync:", error);
-// 	  }
-// 	}
-//   );
-
-export const getlistCommentAsync = createAsyncThunk('comment/getComment', async (station_id: number) => {
-	const response = await getComment(station_id);
-	return response.data.comments; // Giả sử dữ liệu trả về từ API có một trường 'comments'
-});
-  
+export const getlistCommentAsync = createAsyncThunk<any, { station_id: number}>(
+  "comment/getComment",
+  async (payload: any, thunkAPI: any) => {
+    try {
+      thunkAPI.dispatch(toggleLoadingStatus());
+      const { keyword } = thunkAPI.getState().stationPorts;
+      console.log("Keyword in getListPortsTypeAsync:", keyword);
+      const params = keyword ? { keyword: encodeURIComponent(keyword) } : {};
+      const response = await getComment(payload.station_id, params); 
+      return response.data;
+    } catch (error) {
+      console.error("Error in getListPortsTypeAsync:", error);
+      throw error;
+    } finally {
+      thunkAPI.dispatch(toggleLoadingStatus());
+    }
+  }
+);
 
 export const createCommentAsync = createAsyncThunk<any, any>(
 	"comment/create",
@@ -57,22 +54,18 @@ export const orderSlice = createSlice({
   },
 	extraReducers:(builder) => {
     builder
-    // .addCase(getlistCommentAsync.fulfilled,(state,action)=>{
-    //   const resData = action.payload;
-    //   const {keyword } = state;
+    .addCase(getlistCommentAsync.fulfilled,(state,action)=>{
+      const resData = action.payload;
+      const {keyword } = state;
 
-    //   if(Array.isArray(resData)){
-    //     state.listComment = resData.filter((order :{name:string})=>
-    //       order.name.toLowerCase().includes(keyword.toLowerCase())
-    //     );
-    //   }else{
-    //     state.listComment = [resData]
-    //   }
-    // })
-	builder.addCase(getlistCommentAsync.fulfilled, (state, action) => {
-		state.listComment = action.payload;
-	})
-
+      if(Array.isArray(resData)){
+        state.listComment = resData.filter((order :{name:string})=>
+          order.name.toLowerCase().includes(keyword.toLowerCase())
+        );
+      }else{
+        state.listComment = [resData]
+      }
+    })
     .addCase(createCommentAsync.fulfilled,(state,action)=>{
       state.listComment = [...state.listComment, action.payload]
     })

@@ -9,6 +9,7 @@ import stationReducer from '../modules/station/slices'
 import orderReducer from '../modules/order/slice'
 import chatReducer from '../modules/chats/slice'
 import commentReducer from '../modules/comment/slice'
+import stationPortsReducer from '../modules/chaging_ports/slice'
 
 export const store = configureStore({
     reducer:{
@@ -22,6 +23,7 @@ export const store = configureStore({
       user: userReducer,
       customer: customerReducer,
       station : stationReducer,
+      stationPorts : stationPortsReducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
