@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next'
 import CustomButton from '../../controllers/common/custombutton/CustomButton'
 import { BsCheckLg } from 'react-icons/bs'
 
+
+
 const ChangeAvata = () => {
   const { t } = useTranslation('translation')
   const [value, setValue] = useState(1)

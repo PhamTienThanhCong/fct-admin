@@ -20,6 +20,7 @@ export interface UserPayload {
   card_id: string | null;
   title: string | null;
   description: string | null;
+  keyword:string
 }
 
 export interface AuthState {

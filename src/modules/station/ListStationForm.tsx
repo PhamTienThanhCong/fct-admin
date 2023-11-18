@@ -1,13 +1,82 @@
-import React from "react";
-import { Col, Form, Input, Row, Switch } from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Form, Input, Row, Upload, Image, Modal, message } from "antd";
 import { useTranslation } from "react-i18next";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import type { UploadFile } from 'antd/lib/upload/interface';
+import { RcFile } from "antd/es/upload";
 
 interface ListStationFormProps {
-	userId: number | null;
+  userId: number | null;
+  initialImageUrl: string | null;
 }
 
-const ListStationForm: React.FC<ListStationFormProps> = ({ userId }) => {
-	const { t } = useTranslation("translation");
+const ListStationForm: React.FC<ListStationFormProps> = ({ userId, initialImageUrl }) => {
+  const { t } = useTranslation("translation");
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewTitle, setPreviewTitle] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
+
+  useEffect(() => {
+    if (initialImageUrl) {
+      setImageUrl(initialImageUrl);
+    }
+  }, [initialImageUrl]);
+
+  const handleChange = ({ fileList: newFileList }: { fileList: UploadFile[] }) => {
+    setFileList(newFileList.slice(-1));
+  };
+
+  const getBase64 = (file: RcFile): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const beforeUpload = (file: RcFile) => {
+    const isImage = file.type.startsWith('image/');
+    if (!isImage) {
+      message.error('You can only upload image files!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must be smaller than 2MB!');
+    }
+    return isImage && isLt2M;
+  };
+
+  const handlePreview = async (file: UploadFile | undefined) => {
+    if (file) {
+      if (!file.url && !file.preview) {
+        if (file.originFileObj) {
+          file.preview = await getBase64(file.originFileObj);
+        }
+      }
+      setPreviewImage(file?.url || file.preview || '');
+      setPreviewVisible(true);
+      setPreviewTitle(
+        file?.name || (file?.url && file.url.substring(file.url.lastIndexOf('/') + 1)) || ''
+      );
+    }
+  };
+
+  const customRequest = async ({ file, onSuccess }: any) => {
+    try {
+      const base64Url = await getBase64(file);
+      setImageUrl(base64Url);
+      setLoading(false);
+      onSuccess();
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setLoading(false);
+      message.error("Failed to upload image. Please try again.");
+    }
+  };
+
 
 	return (
 		<Row gutter={24}>
@@ -81,25 +150,52 @@ const ListStationForm: React.FC<ListStationFormProps> = ({ userId }) => {
 					<Input />
 				</Form.Item>
 			</Col>
-			<Col span={12}>
-				<Form.Item
-					name="image"
-					label={t("image")}
-					rules={[
-						{
-							required: true,
-							whitespace: true,
-							message: `${t("image")}${t("not_empty")}`,
-						},
-						{
-							max: 50,
-							message: `${t("image")}${t("name_too_long")}`,
-						},
-					]}>
-					<Input />
-				</Form.Item>
-			</Col>
+      <Col span={12}>
+        <Form.Item
+          name="image"
+          label={t("image")}
+          rules={[
+            {
+              validator: (_, value) => {
+                if (fileList.length === 0 && !imageUrl) {
+                  return Promise.reject(`${t("image")}${t("not_empty")}`);
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
+        >
+          <Upload
+            name="image"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            onChange={handleChange}
+            beforeUpload={beforeUpload}
+            customRequest={customRequest}
+            accept=".jpg, .jpeg, .png"
+            onPreview={handlePreview}
+          >
+            {imageUrl ? (
+              <Image src={imageUrl} alt="Image" style={{ width: "100%" }} />
+            ) : (
+              <div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            )}
+          </Upload>
+        </Form.Item>
 
+        <Modal
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={() => setPreviewVisible(false)}
+        >
+          <img alt='example' style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </Col>
 	  <Col span={12}>
 		<Form.Item
 		  name="email"

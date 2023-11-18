@@ -16,13 +16,16 @@ import { setLoadingStatus } from "../global/slices";
 import { getRole } from "../role/api";
 import { OBJECT_INPUT } from "../../constants/user";
 import { _deleteUser } from "./slices";
+import { RootState } from "../../config/store";
+import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "../../utils/showAlert";
 
 const { Search } = Input;
 
 const UserContainer: React.FC = () => {
   const { Option } = Select;
   const { t } = useTranslation("translation");
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
 
   const rule_required = (name_lable: string) => {
     return {
@@ -31,7 +34,7 @@ const UserContainer: React.FC = () => {
     };
   };
 
-  const users = useAppSelector((state) => state.user.users);
+  const { users } = useSelector((state: RootState) => state.user);
   const isFetching = useAppSelector((state) => state.user.isFetching);
   const roles = useAppSelector((state) => state.role.Roles);
   const isFetchingRole = useAppSelector((state) => state.role.isFetching);
@@ -42,6 +45,7 @@ const UserContainer: React.FC = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [isSearch, setIsSearch] = useState(false);
+  const [userSelected, setUserSelected] = useState<IUser | null>(null);
 
   const userSelectedRef = React.useRef<number>(0);
 
@@ -153,12 +157,6 @@ const UserContainer: React.FC = () => {
     }
     setOpenModalDel(false);
   };
-  const onSearch = (value: string) => {
-    setIsSearch(true);
-    setPageNumber(0);
-    setPageSize(10);
-    dispatch(getUser({ search: value }));
-  };
 
   return (
     <div className="wrapper_user">
@@ -181,7 +179,6 @@ const UserContainer: React.FC = () => {
             allowClear
             enterButton
             size="large"
-            onSearch={onSearch}
           />
         </div>
         <DynamicList

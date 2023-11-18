@@ -10,8 +10,6 @@ export const getUser = createAsyncThunk<IUser[], any>("user/getUser", async (pay
     return res;
 });
 
-// crud
-
 export const createUser = createAsyncThunk<IUser, UserPayload>("user/createUser", async (payload, thunkApi) => {
     const res = await sendRequest('/user', {
         thunkApi,

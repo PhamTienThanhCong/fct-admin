@@ -226,7 +226,7 @@ return (
             <Form.Item name='id' hidden>
               <Input />
             </Form.Item>
-            <ListStationForm userId={userSelected ? userSelected.id : null} />
+            <ListStationForm userId={userSelected ? userSelected.id : null} initialImageUrl={userSelected ? userSelected.image : null} />
           </Form>
         </ModalComponent>
         <ModalComponent
