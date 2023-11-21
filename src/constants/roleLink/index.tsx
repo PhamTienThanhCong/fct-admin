@@ -98,7 +98,23 @@ export const ADMIN_SLIDER = [
 		icon: <BsChatText />,
 		link: "/chat",
 		title: "manage_question_and_answer",
-		subMenu: undefined,
+		subMenu: [
+			{
+				key: "151",
+				link: "/chat",
+				title: "Quản lý đoạn chat",
+			},
+            {
+				key: "152",
+				link: "/chat/training",
+				title: "Huấn luyệt chatbot",
+			},
+            {
+				key: "153",
+				link: "/chat/demo",
+				title: "Demo chatbot",
+			},
+		],
 	},
 	{
 		key: "16",
