@@ -3,7 +3,12 @@ export interface ChatPayload {
     patterns: string[];
     responses: string[];
 }
+
+export interface ChatResponse {
+    intents: ChatPayload[];
+}
+
 export interface chatState {
     listchat: ChatPayload[];
-    keyword: string;
+    isFetching: boolean;
 }

@@ -1,17 +1,50 @@
-import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { sendRequest } from "../../utils/sendRequest";
+import { ChatPayload, ChatResponse } from "../../types/chat/chat";
 
-export const getchat = async (params:any) => {
-	return await axios.get('/chat',{params:params})
-}
+// crud
+export const getChat = createAsyncThunk<ChatResponse, any>(
+	"chat/getChat",
+	async (payload, thunkApi) => {
+		const res = await sendRequest("/chat", {
+			thunkApi,
+			method: "GET",
+		});
+		return res;
+	}
+);
 
-export const createchat = async (params:any) => {
-	return await axios.post('/chat',params)
-}
+export const createChat = createAsyncThunk<ChatPayload, ChatPayload>(
+	"chat/createChat",
+	async (payload, thunkApi) => {
+		const res = await sendRequest("/chat", {
+			thunkApi,
+			method: "POST",
+			payload: payload,
+		});
+		return res;
+	}
+);
 
-export const updatechat = async (tag:string, params:any) => {
-	return await axios.put(`/chat/${tag}`, params);
-}
-  
-export const deletechat = async (tag: any) => {
-	return await axios.delete(`/chat/${tag}`);
-};
+export const updateChat = createAsyncThunk<ChatPayload, ChatPayload>(
+	"chat/updateChat",
+	async (payload, thunkApi) => {
+		const res = await sendRequest(`/chat/${payload.tag}`, {
+			thunkApi,
+			method: "PUT",
+			payload: payload,
+		});
+		return res;
+	}
+);
+
+export const deleteChat = createAsyncThunk<any, ChatPayload>(
+	"chat/deleteChat",
+	async (payload, thunkApi) => {
+		const res = await sendRequest(`/chat/${payload.tag}`, {
+			thunkApi,
+			method: "DELETE",
+		});
+		return res;
+	}
+);

@@ -71,7 +71,7 @@
     "card_id" : "Card id",
     "title" : "Title",
     "order" : "Reservations",
-    "manage_question_and_answer" : "Manage questions and answers",
+    "manage_question_and_answer" : "Manage chat",
     "list_order" : "List of reservations",
     "patterns" :  "Patterns",
     "charging_port_id" : "Charging port id",
