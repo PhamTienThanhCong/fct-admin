@@ -13,30 +13,28 @@ const BotTraining: React.FC = () => {
 
     const [codeData, setCodeData] = React.useState<any>("");
     const [webData, setWebData] = React.useState<string>("");
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
     const onCrawData = async () => {
         if(webData.length === 0) return showAlert("error", "Please input website");
-
-        dispatch(setLoadingStatus(true));
-
+        setIsLoading(true);
         await dispatch(crawBotData({ website: webData }));
         showAlert("success", "Craw data success");
-        dispatch(setLoadingStatus(false));
+        setIsLoading(false);
     };
 
     const onGetCodeData = async () => {
-        dispatch(setLoadingStatus(true));
-
+        setIsLoading(true);
         let res = await dispatch(getBotData({}));
         setCodeData(JSON.stringify(res.payload));
         showAlert("success", "Get code data success");
-        dispatch(setLoadingStatus(false));
+        setIsLoading(false);
     };
 
     const onTraining = async () => {
-        dispatch(setLoadingStatus(true));
+        setIsLoading(true);
         await dispatch(trainBotData({}));
-        dispatch(setLoadingStatus(false));
+        setIsLoading(false);
     };
 
     return (
@@ -53,8 +51,8 @@ const BotTraining: React.FC = () => {
                                 <p>Huấn luyện chatbot với dữ liệu hiện tại</p>
                                 {/* flex div*/}
                                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
-                                    <Button type="primary" onClick={()=>onTraining()}>Huấn luyện</Button>
-                                    <Button type="primary" onClick={() => onGetCodeData()}>
+                                    <Button type="primary" disabled={isLoading} onClick={()=>onTraining()} >Huấn luyện</Button>
+                                    <Button type="primary" disabled={isLoading} onClick={() => onGetCodeData()}>
                                         Xem Dữ liệu hệ thống
                                     </Button>
                                 </div>
@@ -64,10 +62,10 @@ const BotTraining: React.FC = () => {
                             <Card title="Dữ liệu">
                                 <p>Tạo dữ liệu mới cho chatbot</p>
                                 <div style={{ display: "flex", marginTop: "10px" }}>
-                                    <Button type="primary" onClick={()=>onCrawData()}>Tạo dữ liệu</Button>
+                                    <Button type="primary" disabled={isLoading} onClick={()=>onCrawData()}>Tạo dữ liệu</Button>
                                     {/* input */}
                                     <div style={{ width: "50%", marginLeft: "10px" }}>
-                                        <Input placeholder="API data" value={webData} onChange={(e) => setWebData(e.target.value)} />
+                                        <Input placeholder="API data" readOnly={isLoading} value={webData} onChange={(e) => setWebData(e.target.value)} />
                                     </div>
                                 </div>
                             </Card>
