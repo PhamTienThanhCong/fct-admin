@@ -1,12 +1,10 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import PageTitle from "../../layouts/components/Pagetitle";
 import { showAlert } from "../../utils/showAlert";
 import { useAppDispatch } from "../../config/hooks";
-import { Button, Card, Col, Input, Row } from "antd";
+import { Button, Card, Col, Input, Row, Space, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { crawBotData, getBotData, trainBotData } from "./api";
-import { setLoadingStatus } from "../global/slices";
 
 const BotTraining: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -35,10 +33,35 @@ const BotTraining: React.FC = () => {
         setIsLoading(true);
         await dispatch(trainBotData({}));
         setIsLoading(false);
+        showAlert("success", "Training success");
     };
 
     return (
-        <div className="wrapper_user">
+        <div className="wrapper_user" style={{ position: "relative"}}>
+            {isLoading && (
+            <Space
+                style={{
+                    position: 'fixed',
+                    display: 'flex',
+                    zIndex: 9999,
+                    width: '100vw',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '100vh',
+                    top: 0,
+                    left: 0,
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                }}
+                size="middle"
+            >
+                <Spin size="large" />
+                <div style={{ textAlign: 'center', marginTop: '8px', width: '100%' ,color:'#4096ff'}}>
+                Loading...
+                </div>
+            </Space>
+            )}
+
             <div className="item_user">
                 <div className="header_table_user">
                     <PageTitle title="Huấn luyện chatbot" />

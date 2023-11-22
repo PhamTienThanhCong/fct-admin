@@ -19,6 +19,7 @@ import Order from "./modules/order/Order";
 import Chat from "./modules/chats/Chat";
 import StationPorts from "./modules/chaging_ports/StationPorts";
 import BotTraining from "./modules/bot/BotTraining";
+import BotChat from "./modules/bot/BotChat";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/chat" element={<Chat/>} />
               <Route path="/station_ports" element={<StationPorts/>} />
               <Route path="/chat/training" element={<BotTraining />} />
+              <Route path="/chat/demo" element={<BotChat />} />
             </Route>
           </Route>
           <Route path="/access-forbidden" element={<AccessForbidden/>}/>

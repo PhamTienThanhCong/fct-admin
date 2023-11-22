@@ -37,3 +37,16 @@ export const trainBotData = createAsyncThunk<any, any>(
         return res;
     }
 );
+
+// botchat
+export const chatBotData = createAsyncThunk<any, any>(
+    "bot/chatData",
+    async (payload, thunkApi) => {
+        const res = await sendRequest("/bot", {
+            thunkApi,
+            method: "POST",
+            payload: payload,
+        });
+        return res;
+    }
+);
