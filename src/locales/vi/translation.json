@@ -70,5 +70,8 @@
     "no": "không",
     "manage_station" : "Quản lý trạm sạc",
     "list_station" : "Danh sách trạm sạc",
-    "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên"
+    "rule_password": "Mật khẩu phải bao gồm ký tự số, chữ hoa, chữ thường, ký tự đặc biệt và có độ dài từ 8 ký tự trở lên",
+    "chatbot" : "Quản lý chatbot",
+    "list_chatbot" : "Danh sách chatbot",
+    "training_chatbot" : "Training chatbot"
 }
