@@ -53,7 +53,7 @@ const BotChat: React.FC = () => {
     <div className="wrapper_user" style={{ position: "relative" }}>
       <div className="item_user">
         <div className="header_table_user">
-          <PageTitle title="Huấn luyện chatbot" />
+          <PageTitle title="Demo chat bot" />
         </div>
         {/* two button test data and training */}
         <div style={{ padding: "16px" }}>
@@ -82,6 +82,11 @@ const BotChat: React.FC = () => {
               placeholder="Nhập câu hỏi của bạn..."
               value={inputValue}
               onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSendMessage();
+                }
+              }}
               style={{ flex: "1", marginRight: "8px" }}
             />
             <Button type="primary" onClick={handleSendMessage}>
